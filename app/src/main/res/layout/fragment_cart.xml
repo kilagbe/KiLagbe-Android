@@ -13,34 +13,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Proceed to Checkout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/cart_total"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderItemsRecycler"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toEndOf="@+id/total_label"
+        app:layout_constraintTop_toTopOf="@+id/total_label" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderItemsRecycler"
         android:layout_width="357dp"
-        android:layout_height="720dp"
+        android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007" />
+        app:layout_constraintVertical_bias="0.007" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/cart_total"
-        android:layout_width="99dp"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/checkout_button"
-        app:layout_constraintEnd_toStartOf="@+id/checkout_button"
-        app:layout_constraintHorizontal_bias="0.923"
+        android:textSize="@dimen/label_fullscreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/total_label"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/total_label"
+        app:layout_constraintTop_toBottomOf="@+id/total_label"
+        app:layout_constraintVertical_bias="0.275" />
+
+    <TextView
+        android:id="@+id/total_label"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:text="Total"
+        android:textSize="@dimen/label_fullscreen"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/orderItemsRecycler"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="@+id/orderItemsRecycler"
-        app:layout_constraintTop_toTopOf="@+id/checkout_button"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/orderItemsRecycler" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
