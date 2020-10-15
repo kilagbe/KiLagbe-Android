@@ -19,7 +19,7 @@
     <dimen name="label_fullscreen">24sp</dimen>
     <dimen name="text_fullscreen">20sp</dimen>
     <dimen name="text_button">16sp</dimen>
-    <dimen name="label_dialog">20sp</dimen>
+    <dimen name="label_dialog">24sp</dimen>
     <dimen name="text_dialog">18sp</dimen>
     <dimen name="text_carditem_main">24sp</dimen>
     <dimen name="text_carditem_regular">18sp</dimen>
