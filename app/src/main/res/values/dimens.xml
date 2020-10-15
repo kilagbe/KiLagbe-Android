@@ -26,5 +26,5 @@
     <dimen name="text_recycleritem_regular">18sp</dimen>
     <dimen name="text_recycleritem_large">20sp</dimen>
 
-    <dimen name="defaultPadding">10dp</dimen>
+    <dimen name="defaultPaddingMargin">10dp</dimen>
 </resources>

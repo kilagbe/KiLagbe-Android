@@ -13,6 +13,8 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:layout_margin="@dimen/defaultPaddingMargin"
+            android:padding="@dimen/defaultPaddingMargin"
             android:id="@+id/actv_customer"
             android:layout_width="match_parent"
             android:layout_height="43dp"
