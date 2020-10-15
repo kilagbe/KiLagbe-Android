@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:339483839124:android:27cfc76a8e6092e3f1c281",
+        "android_client_info": {
+          "package_name": "com.kichai.kichai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339483839124-2srkic71n0h1sluo22bdonnj7ksfgbsa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kichai.kichai",
+            "certificate_hash": "679db8e2f5721b1a86ee95d90632ef5d61f0c2bd"
+          }
+        },
+        {
+          "client_id": "339483839124-n1tn6scbqtp7t11p52jn3rk3jm2kcftg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmplDF187A-4qNQQa5hZPxz74TU21tw30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339483839124-n1tn6scbqtp7t11p52jn3rk3jm2kcftg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:339483839124:android:fd2a0320162c7a52f1c281",
         "android_client_info": {
           "package_name": "com.kilagbe.kilagbe"

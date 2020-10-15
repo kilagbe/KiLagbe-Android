@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kilagbe.kilagbe">
+    package="com.kichai.kichai">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"
+        <activity android:name="com.kichai.kichai.ui.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,10 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.DeliverymanHome" />
-        <activity android:name=".ui.auth.RegisterActivity" />
-        <activity android:name=".ui.auth.LoginActivity" />
-        <activity android:name=".ui.CustomerHome" />
+        <activity android:name="com.kichai.kichai.ui.DeliverymanHome" />
+        <activity android:name="com.kichai.kichai.ui.auth.RegisterActivity" />
+        <activity android:name="com.kichai.kichai.ui.auth.LoginActivity" />
+        <activity android:name="com.kichai.kichai.ui.CustomerHome" />
     </application>
 
 </manifest>

@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.kilagbe.kilagbe.ui.profile.ProfileFragment"
+        android:name="com.kichai.kichai.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
 
     <fragment
         android:id="@+id/navigation_all_orders"
-        android:name="com.kilagbe.kilagbe.ui.deliveryman.DeliveryAllOrdersFragment"
+        android:name="com.kichai.kichai.ui.deliveryman.DeliveryAllOrdersFragment"
         android:label="@string/all_orders"
         tools:layout="@layout/fragment_delivery_all_orders" >
 
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_my_orders"
-        android:name="com.kilagbe.kilagbe.ui.deliveryman.DeliveryMyOrdersFragment"
+        android:name="com.kichai.kichai.ui.deliveryman.DeliveryMyOrdersFragment"
         android:label="@string/my_orders"
         tools:layout="@layout/fragment_delivery_my_orders" />
 
