@@ -11,15 +11,18 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:id="@+id/toolbar"
+            android:text="@string/app_name"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 
-            />
+
+            app:subtitle="Ki Chai?" />
 
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView

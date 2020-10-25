@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -38,6 +39,7 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
 
         nav = findViewById(R.id.nav_menu)
         drawerLayout = findViewById(R.id.drawer)
+
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
 
 
