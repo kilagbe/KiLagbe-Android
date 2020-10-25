@@ -14,6 +14,7 @@ import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
 import com.kichai.kichai.databasing.ItemHelper
 import com.kichai.kichai.tools.AutoCompleteTextViewOnItemClickListener
+import kotlinx.android.synthetic.main.activity_customer_home.*
 
 class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener, ItemHelper.getAllBooksFailureListener, AutoCompleteTextViewOnItemClickListener.onExitListener {
 
@@ -46,6 +47,20 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         val navController = findNavController(R.id.nav_host_fragment)
 
         nav.setupWithNavController(navController)
+        val drawerToggle: ActionBarDrawerToggle= object :ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            (R.string.navigation_drawer_open)   ,
+            (R.string.navigation_drawer_close)
+        )
+        {
+
+        }
+        drawerToggle.isDrawerIndicatorEnabled=true
+        drawer.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
     }
 
     override fun getAllBooksSuccess(bookArray: ArrayList<Book>) {
