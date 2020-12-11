@@ -96,6 +96,7 @@ class ItemHelper {
 
     fun getCategoryBook(category: String)
     {
+
         FirebaseFirestore.getInstance().collection("books").whereArrayContains("categories", category).get()
             .addOnSuccessListener {
                 if ( !it.isEmpty )
@@ -120,7 +121,7 @@ class ItemHelper {
 
     fun getDoubleCategoryBook(cat1: String, cat2: String)
     {
-        FirebaseFirestore.getInstance().collection("books").whereArrayContainsAny("categories", listOf(cat1, cat2)).get()
+        FirebaseFirestore.getInstance().collection("books").whereArrayContainsAny("categories", listOf(cat1,cat2)).get()
             .addOnSuccessListener {
                 if ( !it.isEmpty )
                 {

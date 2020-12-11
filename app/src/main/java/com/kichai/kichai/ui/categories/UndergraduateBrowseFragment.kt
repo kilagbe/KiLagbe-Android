@@ -3,6 +3,7 @@ package com.kichai.kichai.ui.categories
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
@@ -103,22 +105,50 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     override fun getDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
         val adapter = GroupAdapter<GroupieViewHolder>()
         lateinit var recycler: RecyclerView
+
+        //Finding device width to decide whether to choose GridLayout spanCount
+        var gridSpanCount:Int
+        val dm = DisplayMetrics()
+        activity?.windowManager!!.defaultDisplay.getMetrics(dm)
+        var screenWidth = (dm.widthPixels.toDouble() / dm.xdpi).toInt()
+        if(screenWidth < 5) {
+            gridSpanCount = 2
+        }else{
+            gridSpanCount = 4
+        }
+
         when (cat2) {
             "Medical" -> {
                 recycler = undergradMedicalRecyclerView
+                if (bookArray.size <= gridSpanCount ) undergradMedicalRecyclerView.layoutParams.height =
+                    resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
             "Engineering" -> {
                 recycler = undergradEngineeringRecyclerView
+                if (bookArray.size <= gridSpanCount ) undergradEngineeringRecyclerView.layoutParams.height =
+                    resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
             "BBA" -> {
                 recycler = undergradBbaRecyclerView
+                if (bookArray.size <= gridSpanCount ) undergradBbaRecyclerView.layoutParams.height =
+                    resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
         }
         bookArray.forEach {
             adapter.add(BookAdapter(it))
         }
+
         recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
+        recycler.layoutManager = GridLayoutManager(
+            context,
+            gridSpanCount,
+            GridLayoutManager.VERTICAL,
+            false
+        )
+
+//        recycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
+
+
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
