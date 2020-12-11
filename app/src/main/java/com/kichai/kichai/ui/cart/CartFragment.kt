@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kichai.kichai.R
+import com.kichai.kichai.R.drawable
 import com.kichai.kichai.data.Cart
 import com.kichai.kichai.data.Location
 import com.kichai.kichai.databasing.CartHelper
@@ -34,6 +36,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
 
     lateinit var cartrecycler: RecyclerView
     lateinit var totalText: TextView
+    lateinit var checkoutButton: Button
     lateinit var adapter: GroupAdapter<GroupieViewHolder>
 
     lateinit var locations: ArrayList<Location>
@@ -59,6 +62,8 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
 
         cartrecycler = root.findViewById<RecyclerView>(R.id.orderItemsRecycler)
         totalText = root.findViewById<TextView>(R.id.cart_total)
+        checkoutButton = root.findViewById<Button>(R.id.checkout_button)
+
         root.findViewById<Button>(R.id.checkout_button).setOnClickListener {
 
             addressDialog = AlertDialog.Builder(context).create()
@@ -171,10 +176,15 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
             cart.orderBookItems.forEach { orderItem ->
                 adapter.add(CustomerOrderAdapter(orderItem))
             }
+
+            checkoutButton.isEnabled = true
+            checkoutButton.setBackgroundResource(R.drawable.rounded_background_gradient)
+            checkoutButton.setTextColor(Color.WHITE)
         }
         else
         {
             Toast.makeText(context, "No book items in cart", Toast.LENGTH_SHORT).show()
+            checkoutButton.isEnabled = false
         }
 
         if ( cart.orderEssentialItems.isNotEmpty() )
@@ -193,6 +203,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
         cartrecycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL ,false)
         cartrecycler.adapter = adapter
         totalText.text = (cart.total.toString())
+
     }
 
     @SuppressLint("UseRequireInsteadOfGet")

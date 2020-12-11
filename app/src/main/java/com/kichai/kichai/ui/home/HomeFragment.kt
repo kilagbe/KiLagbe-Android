@@ -1,15 +1,19 @@
 package com.kichai.kichai.ui.home
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
@@ -94,7 +98,25 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
             this
         )
 
-        categoryRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
+        //Finding device width to decide whether to choose LinearLayout or GridLayout
+        val dm = DisplayMetrics()
+        activity?.windowManager!!.defaultDisplay.getMetrics(dm)
+        var screenWidth = (dm.widthPixels.toDouble()/dm.xdpi).toInt()
+
+        if(screenWidth < 5) {
+            categoryRecyclerView.layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+        }else{
+            categoryRecyclerView.layoutManager = GridLayoutManager(
+                context,
+                2,
+                GridLayoutManager.VERTICAL,
+                false
+            )
+        }
         categoryRecyclerView.adapter = categoryAdapter
 
         ih.getAllBooks()
@@ -107,8 +129,37 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         bookArray.forEach {
             booksAdapter.add(BookAdapter(it))
         }
-        booksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
+
+        //Finding device width to decide whether to choose LinearLayout or GridLayout
+        val dm = DisplayMetrics()
+        activity?.windowManager!!.defaultDisplay.getMetrics(dm)
+        var screenWidth = (dm.widthPixels.toDouble()/dm.xdpi).toInt()
+
+        if(screenWidth < 5) {
+            booksRecyclerView.layoutManager = GridLayoutManager(
+                context,
+                2,
+                GridLayoutManager.VERTICAL,
+                false
+            )
+        }else{
+            booksRecyclerView.layoutManager = GridLayoutManager(
+                context,
+                4,
+                GridLayoutManager.VERTICAL,
+                false
+            )
+        }
+
+
+//        booksRecyclerView.layoutManager = LinearLayoutManager(
+//            context,
+//            LinearLayoutManager.VERTICAL,
+//            false
+//        )
+
         booksRecyclerView.adapter = booksAdapter
+
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         booksAdapter.setOnItemClickListener(listener)
@@ -125,7 +176,11 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         essentialArray.forEach {
             essentialAdapter.add(EssentialAdapter(it))
         }
-        essentialRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
+        essentialRecyclerView.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
         essentialRecyclerView.adapter = essentialAdapter
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)

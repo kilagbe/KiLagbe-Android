@@ -5,6 +5,7 @@
 
     <dimen name="recyclerview_parent_custom_height">200dp</dimen>
     <dimen name="recyclerview_parent_custom_height_books">280dp</dimen>
+    <dimen name="recyclerview_parent_custom_height_books_2">500dp</dimen>
 
     <dimen name="cardview_custom_width">250dp</dimen>
     <dimen name="cardview_custom_height">150dp</dimen>
@@ -20,11 +21,11 @@
     <dimen name="text_fullscreen">20sp</dimen>
     <dimen name="text_button">16sp</dimen>
     <dimen name="label_dialog">24sp</dimen>
-    <dimen name="text_dialog">18sp</dimen>
+    <dimen name="text_dialog">14sp</dimen>
     <dimen name="text_carditem_main">24sp</dimen>
     <dimen name="text_carditem_regular">18sp</dimen>
     <dimen name="text_recycleritem_regular">18sp</dimen>
-    <dimen name="text_recycleritem_large">20sp</dimen>
+    <dimen name="text_recycleritem_large">14sp</dimen>
 
     <dimen name="defaultPaddingMargin">10dp</dimen>
 </resources>
