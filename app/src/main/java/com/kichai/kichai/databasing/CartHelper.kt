@@ -406,7 +406,7 @@ class CartHelper(var context: Context?) : ItemHelper.changeAmountEssentialSucces
     fun checkoutCart(uid: String, address: String, charge: Double)
     {
         val time = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("yyyy-MM-dd__HH-mm-ss")
+        val formatter = SimpleDateFormat("yyyy-MM-dd--HH-mm-ss")
 //        val _timestamp = Date().date.toString() + Date().month.toString() + Date().year.toString() + "-"  + Date().hours.toString() + Date().minutes.toString() + Date().seconds.toString()
         val _timestamp = formatter.format(time)
         val order = CompleteOrder(uid, _timestamp)
@@ -425,7 +425,7 @@ class CartHelper(var context: Context?) : ItemHelper.changeAmountEssentialSucces
                                 order.customerstatus = "AWAITING DELIVERY"
                                 order.deliverymanstatus = "AWAITING PICK UP"
                                 order.deliverymanphone = ""
-                                order.orderId = order.customeruid + "-" + order.timestamp
+                                order.orderId = order.customeruid.toUpperCase().take(5) + "-" + order.timestamp
                                 temp!!.total = temp.total!!.plus(charge)
                                 order.cart = temp
                                 order.address = address
