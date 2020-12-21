@@ -1,9 +1,12 @@
 package com.kichai.kichai.ui
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.kichai.kichai.R
 import com.kichai.kichai.data.User
@@ -17,6 +20,9 @@ class MainActivity : AppCompatActivity(), ProfileHelper.getCustomerSuccessListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val anim = AnimationUtils.loadAnimation(this, R.anim.splash_anim)
+        val logo : ImageView = findViewById(R.id.splash_logo)
+        logo.startAnimation(anim)
         Handler().postDelayed({
             ph = ProfileHelper()
             ph.setGetDeliverymanFailureListener(this)
