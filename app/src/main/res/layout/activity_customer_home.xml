@@ -26,19 +26,25 @@
 
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-            android:layout_margin="@dimen/defaultPaddingMargin"
-            android:padding="@dimen/defaultPaddingMargin"
             android:id="@+id/actv_customer"
             android:layout_width="match_parent"
             android:layout_height="43dp"
+            android:layout_margin="@dimen/defaultPaddingMargin"
             android:layout_marginTop="10dp"
+            android:theme="@style/Autocomplete"
             android:background="@drawable/rounded_background_text"
+            android:drawableEnd="@drawable/ic_baseline_search_24"
+            android:drawableRight="@drawable/ic_baseline_search_24"
             android:ems="50"
             android:hint="Search for books"
-            android:shadowRadius="@integer/config_navAnimTime">
+            android:padding="@dimen/defaultPaddingMargin"
+            android:shadowRadius="@integer/config_navAnimTime"
+            android:drawableTint="@color/Red"
 
-            <requestFocus />
+            >
+
         </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
+<!--            <requestFocus />-->
 
         <fragment
             android:id="@+id/nav_host_fragment"

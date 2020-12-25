@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/cardview_custom_height"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/cardview_custom_corner_radius"
     app:cardElevation="@dimen/cardview_custom_elevation"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,13 +12,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginVertical="4dp"
         >
 
         <TextView
             android:id="@+id/order_no_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:autoSizeMaxTextSize="25sp"
             android:autoSizeMinTextSize="10sp"
             android:autoSizeTextType="uniform"
@@ -26,31 +30,41 @@
             android:text="Loading Order No..."
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_recycleritem_large"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/deliveryman_phone_no_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Loading Phone Number..."
             android:textSize="@dimen/text_recycleritem_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/order_no_textview"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/order_no_textview"
-            app:layout_constraintTop_toBottomOf="@+id/order_no_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/order_no_textview"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/total_price_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:paddingBottom="8dp"
             android:text="Loading Total Price..."
             android:textSize="@dimen/text_recycleritem_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/deliveryman_phone_no_textview"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/deliveryman_phone_no_textview"
-            app:layout_constraintTop_toBottomOf="@+id/deliveryman_phone_no_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/deliveryman_phone_no_textview"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

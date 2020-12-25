@@ -1,6 +1,7 @@
 package com.kichai.kichai.ui
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
@@ -62,6 +63,7 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         drawerToggle.isDrawerIndicatorEnabled=true
         drawer.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
+
 
     }
 
