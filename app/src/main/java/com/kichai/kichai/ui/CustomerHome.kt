@@ -8,6 +8,7 @@ import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -76,6 +77,13 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         listener.setOnExitListener(this)
         actv.setOnItemClickListener(listener)
         actv.setAdapter(adapter)
+        actv.setOnFocusChangeListener{view, hasFocus ->
+            if(hasFocus){
+                actv.background=ResourcesCompat.getDrawable(resources,R.drawable.rounded_background_text_darkborder,null)
+            }
+            
+        }
+
     }
 
     override fun getAllBooksFailure() {
