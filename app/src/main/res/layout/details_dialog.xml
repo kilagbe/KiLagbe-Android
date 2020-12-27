@@ -6,12 +6,12 @@
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/otp_text"
+        android:id="@+id/name_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="OTP code"
+        android:hint="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,14 +19,14 @@
         app:layout_constraintVertical_bias="0.123" />
 
     <Button
-        android:id="@+id/verify_button"
+        android:id="@+id/done_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Verify OTP"
+        android:text="Done"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/otp_text"
+        app:layout_constraintEnd_toEndOf="@+id/name_text"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/otp_text"
-        app:layout_constraintTop_toBottomOf="@+id/otp_text"
+        app:layout_constraintStart_toStartOf="@+id/name_text"
+        app:layout_constraintTop_toBottomOf="@+id/name_text"
         app:layout_constraintVertical_bias="0.029" />
 </androidx.constraintlayout.widget.ConstraintLayout>
