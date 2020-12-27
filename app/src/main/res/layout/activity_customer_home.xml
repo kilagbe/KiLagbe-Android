@@ -12,12 +12,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:text="@string/app_name"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
+
+            app:subtitle="Ki Chai?" />
+
+
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/actv_customer"
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:layout_margin="@dimen/defaultPaddingMargin"
             android:layout_marginTop="10dp"
+            android:theme="@style/Autocomplete"
             android:background="@drawable/rounded_background_text"
             android:drawableEnd="@drawable/ic_baseline_search_24"
             android:drawableRight="@drawable/ic_baseline_search_24"
@@ -25,6 +39,8 @@
             android:hint="Search for books"
             android:padding="@dimen/defaultPaddingMargin"
             android:shadowRadius="@integer/config_navAnimTime"
+            android:drawableTint="@color/Red"
+
             >
 
         </androidx.appcompat.widget.AppCompatAutoCompleteTextView>

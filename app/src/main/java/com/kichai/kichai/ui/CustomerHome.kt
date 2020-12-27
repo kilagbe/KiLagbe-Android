@@ -1,11 +1,14 @@
 package com.kichai.kichai.ui
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -14,6 +17,7 @@ import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
 import com.kichai.kichai.databasing.ItemHelper
 import com.kichai.kichai.tools.AutoCompleteTextViewOnItemClickListener
+import kotlinx.android.synthetic.main.activity_customer_home.*
 
 class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener, ItemHelper.getAllBooksFailureListener, AutoCompleteTextViewOnItemClickListener.onExitListener {
 
@@ -37,6 +41,7 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
 
         nav = findViewById(R.id.nav_menu)
         drawerLayout = findViewById(R.id.drawer)
+
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
 
 
@@ -46,6 +51,21 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         val navController = findNavController(R.id.nav_host_fragment)
 
         nav.setupWithNavController(navController)
+        val drawerToggle: ActionBarDrawerToggle= object :ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            (R.string.navigation_drawer_open)   ,
+            (R.string.navigation_drawer_close)
+        )
+        {
+
+        }
+        drawerToggle.isDrawerIndicatorEnabled=true
+        drawer.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
+
     }
 
     override fun getAllBooksSuccess(bookArray: ArrayList<Book>) {
@@ -57,6 +77,13 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         listener.setOnExitListener(this)
         actv.setOnItemClickListener(listener)
         actv.setAdapter(adapter)
+        actv.setOnFocusChangeListener{view, hasFocus ->
+            if(hasFocus){
+                actv.background=ResourcesCompat.getDrawable(resources,R.drawable.rounded_background_text_darkborder,null)
+            }
+            
+        }
+
     }
 
     override fun getAllBooksFailure() {
