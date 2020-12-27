@@ -14,8 +14,14 @@
 
         <ImageView
             android:id="@+id/itemImg"
-            android:layout_width="196dp"
-            android:layout_height="204dp"
+            android:layout_width="150dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +34,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="TextView"
-            android:textSize="@dimen/label_fullscreen"
+            android:text="Item Name"
+            android:textSize="@dimen/label_14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -40,12 +46,14 @@
             android:id="@+id/itemQty"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
-            android:textSize="@dimen/text_fullscreen"
+            android:textSize="@dimen/label_12sp"
             app:layout_constraintEnd_toEndOf="@+id/itemName"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
         <Button
@@ -55,8 +63,8 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="14dp"
             android:layout_marginRight="14dp"
-            android:text="Modify order"
-            android:textSize="@dimen/text_button"
+            android:text="Modify Quantity"
+            android:textSize="@dimen/label_14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/delete_button"
             app:layout_constraintHorizontal_bias="0.521"
@@ -69,7 +77,7 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:text="0"
-            android:textSize="@dimen/text_fullscreen"
+            android:textSize="@dimen/label_12sp"
             app:layout_constraintBottom_toBottomOf="@+id/dec_button"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/dec_button"
@@ -81,10 +89,10 @@
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
             android:text="-"
-            android:textSize="@dimen/text_button"
+            android:textSize="@dimen/label_14sp"
             app:layout_constraintEnd_toEndOf="@+id/itemQty"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/itemQty"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/itemQty" />
 
         <Button
@@ -92,7 +100,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="+"
-            android:textSize="@dimen/text_button"
+            android:textSize="@dimen/label_14sp"
             app:layout_constraintBottom_toBottomOf="@+id/quantity_text"
             app:layout_constraintStart_toEndOf="@+id/quantity_text"
             app:layout_constraintTop_toTopOf="@+id/quantity_text"
@@ -102,12 +110,24 @@
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete Order"
-            android:textSize="@dimen/text_button"
+            android:text="Delete  Item"
+            android:textSize="@dimen/label_14sp"
             app:layout_constraintBottom_toBottomOf="@+id/modify_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/modify_button"
             app:layout_constraintTop_toTopOf="@+id/modify_button" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qty: "
+            android:textSize="@dimen/label_12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/itemQty"
+            app:layout_constraintEnd_toEndOf="@+id/itemName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/itemName"
+            app:layout_constraintTop_toTopOf="@+id/itemQty" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

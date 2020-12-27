@@ -25,53 +25,25 @@
             android:paddingBottom="8dp"
             >
 
-            <TextView
-                android:id="@+id/essentials_textview"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:gravity="start"
-                android:text="@string/essentials"
-                android:textAlignment="textStart"
-                android:textSize="@dimen/label_fullscreen"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/essentials_topchart_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/recyclerview_parent_custom_height_books"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/essentials_textview"
-                />
-
 
             <TextView
                 android:id="@+id/text_category"
-                android:textColor="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:gravity="start"
                 android:text="@string/book_categories"
                 android:textAlignment="textStart"
-                android:textSize="@dimen/label_fullscreen"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/label_20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/essentials_topchart_recycler_view" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -89,26 +61,34 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:gravity="start"
                 android:text="@string/books_top_chart"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/label_fullscreen"
+                android:textSize="@dimen/label_20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/recyclerview_parent_custom_height_books_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical"
+                android:layout_marginBottom="8dp"
                 android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
+<!--                android:orientation="vertical"-->
+<!--                android:layout_height="@dimen/recyclerview_parent_custom_height_books_2"-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -124,6 +104,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        app:backgroundTint="@color/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_shopping_cart_512" />
