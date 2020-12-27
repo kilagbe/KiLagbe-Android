@@ -3,6 +3,7 @@ package com.kichai.kichai.ui.categories
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
@@ -93,7 +95,27 @@ class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
         bookArray.forEach {
             abroadTopChartAdapter.add(BookAdapter(it))
         }
-        abroadTopChatRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
+
+        val dm = DisplayMetrics()
+        activity?.windowManager!!.defaultDisplay.getMetrics(dm)
+        var screenWidth = (dm.widthPixels.toDouble()/dm.xdpi).toInt()
+        if(screenWidth < 5) {
+            abroadTopChatRecyclerView.layoutManager = GridLayoutManager(
+                context,
+                2,
+                GridLayoutManager.VERTICAL,
+                false
+            )
+        }else{
+            abroadTopChatRecyclerView.layoutManager = GridLayoutManager(
+                context,
+                4,
+                GridLayoutManager.VERTICAL,
+                false
+            )
+        }
+
+//        abroadTopChatRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
         abroadTopChatRecyclerView.adapter = abroadTopChartAdapter
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
