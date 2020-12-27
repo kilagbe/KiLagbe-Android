@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/cardview_custom_corner_radius"
@@ -26,7 +27,6 @@
             android:autoSizeMaxTextSize="25sp"
             android:autoSizeMinTextSize="10sp"
             android:autoSizeTextType="uniform"
-            android:gravity="center"
             android:text="Loading Order No..."
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_recycleritem_large"
@@ -55,15 +55,30 @@
             android:id="@+id/total_price_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:paddingBottom="8dp"
             android:text="Loading Total Price..."
             android:textSize="@dimen/text_recycleritem_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/deliveryman_phone_no_textview"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryman_phone_no_textview"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/total_price_textview"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/deliveryman_phone_no_textview"
-            app:layout_constraintTop_toBottomOf="@+id/deliveryman_phone_no_textview"
+            app:layout_constraintTop_toTopOf="@+id/total_price_textview"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,6 @@
                     android:autoSizeMaxTextSize="15sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
-                    android:gravity="center"
                     android:text="Loading Order No..."
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_recycleritem_large"
@@ -89,9 +88,22 @@
                     android:textSize="@dimen/text_recycleritem_large"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView_total"
                     app:layout_constraintTop_toBottomOf="@id/deliveryman_phone_no_textview"
+                    app:layout_constraintVertical_bias="0.8" />
+
+                <TextView
+                    android:id="@+id/textView_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="Total: "
+                    app:layout_constraintBottom_toBottomOf="@+id/total_price_textview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/deliveryman_phone_no_textview"
+                    app:layout_constraintTop_toTopOf="@+id/total_price_textview"
                     app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -109,13 +121,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <Button
-                    android:id="@+id/received_button"
+                <TextView
+                    android:id="@+id/textView_seeDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
-                    android:text="Received" />
+                    android:text="See Details"
+                    android:layout_gravity="center"
+                    />
+
             </LinearLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
