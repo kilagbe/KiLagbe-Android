@@ -8,7 +8,7 @@
     android:layout_margin="8dp"
     android:paddingTop="32dp"
     android:paddingBottom="16dp"
-    android:background="#f2f2f2">
+    android:background="@color/White">
 
 
 
