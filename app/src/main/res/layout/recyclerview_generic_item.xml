@@ -6,7 +6,7 @@
     app:cardCornerRadius="@dimen/cardview_custom_corner_radius"
     app:cardElevation="@dimen/cardview_custom_elevation"
     android:layout_margin="8dp"
-    android:background="#f2f2f2">
+    android:background="@color/White">
 
 
 

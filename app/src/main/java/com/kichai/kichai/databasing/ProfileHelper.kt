@@ -76,97 +76,97 @@ class ProfileHelper {
     }
 
 
-    fun changeProfileEmail(email: String, usertype: String) {
-        val user = getUser()
-        user.updateEmail(email)
-            .addOnSuccessListener {
-                val dbref = FirebaseFirestore.getInstance().collection(usertype).document(user.uid)
-                dbref.get()
-                    .addOnSuccessListener {
-                        if ( it.exists() )
-                        {
-                            var temp = it.toObject(User::class.java)
-                            temp!!.email = email
-                            dbref.set(temp)
-                                .addOnSuccessListener {
-                                    mChangeProfileSuccessListener.changeProfileSuccess()
-                                }
-                                .addOnFailureListener {
-                                    mChangeProfileFailureListener.changeProfileFailure()
-                                }
-                        }
-                        else
-                        {
-                            mChangeProfileFailureListener.changeProfileFailure()
-                        }
-                    }
-                    .addOnFailureListener {
-                        mChangeProfileFailureListener.changeProfileFailure()
-                    }
-            }
-            .addOnFailureListener {
-                mChangeProfileFailureListener.changeProfileFailure()
-            }
-    }
-
-    fun changeProfileName(username: String, usertype: String)
-    {
-        val user = getUser()
-        val upds = UserProfileChangeRequest.Builder().setDisplayName(username).build()
-        user.updateProfile(upds)
-            .addOnSuccessListener {
-                val dbref = FirebaseFirestore.getInstance().collection(usertype).document(user.uid)
-                dbref.get()
-                    .addOnSuccessListener {
-                        if ( it.exists() )
-                        {
-                            var temp = it.toObject(User::class.java)
-                            temp!!.name = username
-                            dbref.set(temp)
-                                .addOnSuccessListener {
-                                    mChangeProfileSuccessListener.changeProfileSuccess()
-                                }
-                                .addOnFailureListener {
-                                    mChangeProfileFailureListener.changeProfileFailure()
-                                }
-                        }
-                        else
-                        {
-                            mChangeProfileFailureListener.changeProfileFailure()
-                        }
-                    }
-                    .addOnFailureListener {
-                        mChangeProfileFailureListener.changeProfileFailure()
-                    }
-            }
-            .addOnFailureListener {
-                mChangeProfileFailureListener.changeProfileFailure()
-            }
-    }
-
-    fun changeProfilePassword(password: String)
-    {
-        val user = getUser()
-        user.updatePassword(password)
-            .addOnSuccessListener {
-                mChangeProfileSuccessListener.changeProfileSuccess()
-            }
-            .addOnFailureListener {
-                mChangeProfileFailureListener.changeProfileFailure()
-            }
-    }
-
-    fun changeProfilePhone(phone: String, usertype: String)
-    {
-        val user = getUser()
-        FirebaseFirestore.getInstance().collection(usertype).document(user.uid).update("phone", phone)
-            .addOnSuccessListener {
-                mChangeProfileSuccessListener.changeProfileSuccess()
-            }
-            .addOnFailureListener {
-                mChangeProfileFailureListener.changeProfileFailure()
-            }
-    }
+//    fun changeProfileEmail(email: String, usertype: String) {
+//        val user = getUser()
+//        user.updateEmail(email)
+//            .addOnSuccessListener {
+//                val dbref = FirebaseFirestore.getInstance().collection(usertype).document(user.uid)
+//                dbref.get()
+//                    .addOnSuccessListener {
+//                        if ( it.exists() )
+//                        {
+//                            var temp = it.toObject(User::class.java)
+//                            temp!!.email = email
+//                            dbref.set(temp)
+//                                .addOnSuccessListener {
+//                                    mChangeProfileSuccessListener.changeProfileSuccess()
+//                                }
+//                                .addOnFailureListener {
+//                                    mChangeProfileFailureListener.changeProfileFailure()
+//                                }
+//                        }
+//                        else
+//                        {
+//                            mChangeProfileFailureListener.changeProfileFailure()
+//                        }
+//                    }
+//                    .addOnFailureListener {
+//                        mChangeProfileFailureListener.changeProfileFailure()
+//                    }
+//            }
+//            .addOnFailureListener {
+//                mChangeProfileFailureListener.changeProfileFailure()
+//            }
+//    }
+//
+//    fun changeProfileName(username: String, usertype: String)
+//    {
+//        val user = getUser()
+//        val upds = UserProfileChangeRequest.Builder().setDisplayName(username).build()
+//        user.updateProfile(upds)
+//            .addOnSuccessListener {
+//                val dbref = FirebaseFirestore.getInstance().collection(usertype).document(user.uid)
+//                dbref.get()
+//                    .addOnSuccessListener {
+//                        if ( it.exists() )
+//                        {
+//                            var temp = it.toObject(User::class.java)
+//                            temp!!.name = username
+//                            dbref.set(temp)
+//                                .addOnSuccessListener {
+//                                    mChangeProfileSuccessListener.changeProfileSuccess()
+//                                }
+//                                .addOnFailureListener {
+//                                    mChangeProfileFailureListener.changeProfileFailure()
+//                                }
+//                        }
+//                        else
+//                        {
+//                            mChangeProfileFailureListener.changeProfileFailure()
+//                        }
+//                    }
+//                    .addOnFailureListener {
+//                        mChangeProfileFailureListener.changeProfileFailure()
+//                    }
+//            }
+//            .addOnFailureListener {
+//                mChangeProfileFailureListener.changeProfileFailure()
+//            }
+//    }
+//
+//    fun changeProfilePassword(password: String)
+//    {
+//        val user = getUser()
+//        user.updatePassword(password)
+//            .addOnSuccessListener {
+//                mChangeProfileSuccessListener.changeProfileSuccess()
+//            }
+//            .addOnFailureListener {
+//                mChangeProfileFailureListener.changeProfileFailure()
+//            }
+//    }
+//
+//    fun changeProfilePhone(phone: String, usertype: String)
+//    {
+//        val user = getUser()
+//        FirebaseFirestore.getInstance().collection(usertype).document(user.uid).update("phone", phone)
+//            .addOnSuccessListener {
+//                mChangeProfileSuccessListener.changeProfileSuccess()
+//            }
+//            .addOnFailureListener {
+//                mChangeProfileFailureListener.changeProfileFailure()
+//            }
+//    }
 
     //utility functions
     fun setGetCustomerSuccessListener(lol: getCustomerSuccessListener)

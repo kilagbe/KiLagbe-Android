@@ -17,7 +17,7 @@
         app:cardCornerRadius="5dp"
         android:paddingVertical="4dp"
         android:layout_margin="2dp"
-        android:background="#f2f2f2"
+        android:background="@color/White"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
                 android:layout_marginRight="8dp"
                 android:maxEms="30"
                 android:text=""
-                android:textSize="@dimen/text_recycleritem_regular"
+                android:textSize="@dimen/label_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -48,15 +48,16 @@
                 android:id="@+id/itemQty"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text=""
-                android:textSize="@dimen/text_recycleritem_regular"
+                android:textSize="@dimen/label_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/itemTitle"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/itemImg"
-                app:layout_constraintStart_toStartOf="@+id/itemTitle"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toBottomOf="@+id/itemTitle"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -70,6 +71,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Qty: "
+                android:textSize="@dimen/label_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/itemQty"
+                app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/itemTitle"
+                app:layout_constraintTop_toTopOf="@+id/itemQty"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

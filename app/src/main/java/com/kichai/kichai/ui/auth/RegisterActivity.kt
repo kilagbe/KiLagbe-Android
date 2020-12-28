@@ -4,18 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.kichai.kichai.R
-import com.kichai.kichai.data.User
+import com.kichai.kichai.databasing.AuthHelper
 import com.kichai.kichai.ui.CustomerHome
+import com.kichai.kichai.ui.DeliverymanHome
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationSuccessListener, AuthHelper.onCustomerRegistrationFailureListener, AuthHelper.onCustomerLoginSuccessListener, AuthHelper.onDeliverymanLoginSuccessListener {
+
+    lateinit var ah: AuthHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        ah = AuthHelper(this!!)
+        ah.setOnCustomerRegistrationSuccessListener(this)
+        ah.setOnCustomerRegistrationFailureListener(this)
+        ah.setOnCustomerLoginSuccessListener(this)
+        ah.setOnDeliverymanLoginSuccessListener(this)
 
         login_text.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -24,47 +31,31 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         register_button.setOnClickListener {
-            if (name_text.text.toString().isNotEmpty() && email_text.text.toString().isNotEmpty() && phone_text.text.toString().isNotEmpty() && password_text.text.toString().isNotEmpty() && confirm_password_text.text.toString() == password_text.text.toString()) {
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                    email_text.text.toString(),
-                    password_text.text.toString()
-                )
-                    .addOnSuccessListener {
-                        val user = User(
-                            name_text.text.toString(),
-                            email_text.text.toString(),
-                            phone_text.text.toString()
-                        )
-                        user.uid = it.user!!.uid
-                        val dbref = FirebaseFirestore.getInstance().collection("customer")
-                            .document("${user.uid.toString()}")
-                        dbref.set(user)
-                            .addOnSuccessListener {
-                                Toast.makeText(
-                                    this,
-                                    "User registered successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val intent = Intent(this, CustomerHome::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK.and(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                startActivity(intent)
-                                finish()
-                            }
-                            .addOnFailureListener {
-                                Toast.makeText(this, "${it.message.toString()}", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "${it.message.toString()}", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                Toast.makeText(
-                    this,
-                    "Please enter all details correctly and ensure passwords match",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (phone_text.text.toString().isNotEmpty()) {
+                ah.authWithPhoneNumber(phone_text.text.toString(), 0, 0)
             }
         }
+    }
+
+    override fun customerRegistrationSuccess() {
+        val intent = Intent(this, CustomerHome::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.and(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
+
+    override fun customerRegistrationFailure() {
+        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun customerLoginSuccess() {
+        val intent = Intent(this, CustomerHome::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.and(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
+
+    override fun deliverymanLoginSuccess() {
+        val intent = Intent(this, DeliverymanHome::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.and(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

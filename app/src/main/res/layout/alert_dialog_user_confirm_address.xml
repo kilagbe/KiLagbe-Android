@@ -1,72 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="80dp"
-    android:paddingBottom="80dp">
+    android:paddingTop="24dp"
+    android:paddingBottom="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
 
     <TextView
         android:id="@+id/confirm_address_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Please Confirm Your Address"
-        android:textSize="@dimen/label_fullscreen"
+        android:textSize="@dimen/label_16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/user_address_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Address"
-        android:textSize="@dimen/label_fullscreen"
         android:inputType="textMultiLine"
-        app:layout_constraintStart_toStartOf="@+id/confirm_address_textview"
-        app:layout_constraintTop_toBottomOf="@+id/confirm_address_textview" />
+        android:textSize="@dimen/label_fullscreen"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_address_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/confirm_address_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="64dp"
-        android:text="Confirm   Address"
-        android:textSize="@dimen/text_button"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_background_gradient"
+        android:textColor="@color/White"
+        android:paddingHorizontal="24dp"
+        android:text="Confirm  Address"
+        android:textSize="@dimen/label_16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_address_text"
-        app:layout_constraintVertical_bias="0.80" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
         android:id="@+id/area_spinner"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/user_address_text"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/user_address_text"
-        app:layout_constraintTop_toTopOf="@+id/user_address_text"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10"
+        app:layout_constraintVertical_bias=".5" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textSize="@dimen/label_fullscreen"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Area"
+        android:textSize="@dimen/label_14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/confirm_address_textview"
-        app:layout_constraintEnd_toEndOf="@+id/area_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/area_spinner"
-        app:layout_constraintTop_toTopOf="@+id/confirm_address_textview"
-        app:layout_constraintVertical_bias="0.0" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toStartOf="@+id/confirm_address_textview"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_address_textview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

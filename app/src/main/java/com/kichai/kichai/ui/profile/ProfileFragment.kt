@@ -68,191 +68,146 @@ class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, Pr
         ph.getDeliveryman(uid!!)
 
 
-        username_edit_button.setOnClickListener {
-            val dialog = AlertDialog.Builder(mContext).create()
-            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
-            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
-                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty())
-                {
-                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
-                    {
-                        R.id.deliveryman_radio -> "deliveryman"
-                        R.id.customer_radio -> "customer"
-                        else -> "error"
-                    }
-                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
-                        .addOnSuccessListener {
-                            ph.changeProfileName(dialogview.findViewById<EditText>(R.id.edit).text.toString(), type)
-                            dialog.dismiss()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
-                else
-                {
-                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
-                }
-            }
-            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.setView(dialogview)
-            dialog.setCancelable(true)
-            dialog.show()
-        }
-
-        userpass_edit_button.setOnClickListener {
-            val dialog = AlertDialog.Builder(mContext).create()
-            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
-            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
-                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty() )
-                {
-                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
-                    {
-                        R.id.deliveryman_radio -> "deliveryman"
-                        R.id.customer_radio -> "customer"
-                        else -> "error"
-                    }
-                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
-                        .addOnSuccessListener {
-                            ph.changeProfilePassword(dialogview.findViewById<EditText>(R.id.edit).text.toString())
-                            dialog.dismiss()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
-                else
-                {
-                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
-                }
-            }
-            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.setView(dialogview)
-            dialog.setCancelable(true)
-            dialog.show()
-        }
-
-        useremail_edit_button.setOnClickListener {
-            val dialog = AlertDialog.Builder(mContext).create()
-            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
-            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
-                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty() )
-                {
-                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
-                    {
-                        R.id.deliveryman_radio -> "deliveryman"
-                        R.id.customer_radio -> "customer"
-                        else -> "error"
-                    }
-                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
-                        .addOnSuccessListener {
-                            ph.changeProfileEmail(dialogview.findViewById<EditText>(R.id.edit).text.toString(), type)
-                            dialog.dismiss()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
-                else
-                {
-                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
-                }
-            }
-            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.setView(dialogview)
-            dialog.setCancelable(true)
-            dialog.show()
-        }
-
-        userphone_edit_button.setOnClickListener {
-            val dialog = AlertDialog.Builder(mContext).create()
-            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
-            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
-                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty() )
-                {
-                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
-                    {
-                        R.id.deliveryman_radio -> "deliveryman"
-                        R.id.customer_radio -> "customer"
-                        else -> "error"
-                    }
-                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
-                        .addOnSuccessListener {
-                            ph.changeProfilePhone(dialogview.findViewById<EditText>(R.id.edit).text.toString(), type)
-                            dialog.dismiss()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
-                else
-                {
-                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
-                }
-            }
-            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.setView(dialogview)
-            dialog.setCancelable(true)
-            dialog.show()
-        }
+//        username_edit_button.setOnClickListener {
+//            val dialog = AlertDialog.Builder(mContext).create()
+//            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
+//            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
+//                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty())
+//                {
+//                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
+//                    {
+//                        R.id.deliveryman_radio -> "deliveryman"
+//                        R.id.customer_radio -> "customer"
+//                        else -> "error"
+//                    }
+//                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
+//                        .addOnSuccessListener {
+//                            ph.changeProfileName(dialogview.findViewById<EditText>(R.id.edit).text.toString(), type)
+//                            dialog.dismiss()
+//                        }
+//                        .addOnFailureListener {
+//                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
+//                        }
+//                }
+//                else
+//                {
+//                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
+//                dialog.dismiss()
+//            }
+//            dialog.setView(dialogview)
+//            dialog.setCancelable(true)
+//            dialog.show()
+//        }
+//
+//        userpass_edit_button.setOnClickListener {
+//            val dialog = AlertDialog.Builder(mContext).create()
+//            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
+//            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
+//                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty() )
+//                {
+//                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
+//                    {
+//                        R.id.deliveryman_radio -> "deliveryman"
+//                        R.id.customer_radio -> "customer"
+//                        else -> "error"
+//                    }
+//                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
+//                        .addOnSuccessListener {
+//                            ph.changeProfilePassword(dialogview.findViewById<EditText>(R.id.edit).text.toString())
+//                            dialog.dismiss()
+//                        }
+//                        .addOnFailureListener {
+//                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
+//                        }
+//                }
+//                else
+//                {
+//                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
+//                dialog.dismiss()
+//            }
+//            dialog.setView(dialogview)
+//            dialog.setCancelable(true)
+//            dialog.show()
+//        }
+//
+//        useremail_edit_button.setOnClickListener {
+//            val dialog = AlertDialog.Builder(mContext).create()
+//            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
+//            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
+//                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty() )
+//                {
+//                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
+//                    {
+//                        R.id.deliveryman_radio -> "deliveryman"
+//                        R.id.customer_radio -> "customer"
+//                        else -> "error"
+//                    }
+//                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
+//                        .addOnSuccessListener {
+//                            ph.changeProfileEmail(dialogview.findViewById<EditText>(R.id.edit).text.toString(), type)
+//                            dialog.dismiss()
+//                        }
+//                        .addOnFailureListener {
+//                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
+//                        }
+//                }
+//                else
+//                {
+//                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
+//                dialog.dismiss()
+//            }
+//            dialog.setView(dialogview)
+//            dialog.setCancelable(true)
+//            dialog.show()
+//        }
+//
+//        userphone_edit_button.setOnClickListener {
+//            val dialog = AlertDialog.Builder(mContext).create()
+//            val dialogview = inflater.inflate(R.layout.edit_dialog, null)
+//            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
+//                if ( dialogview.findViewById<EditText>(R.id.edit).text.toString() == dialogview.findViewById<EditText>(R.id.edit_confirm).text.toString() && !dialogview.findViewById<EditText>(R.id.edit).text.toString().isEmpty() )
+//                {
+//                    val type = when (dialogview.findViewById<RadioGroup>(R.id.usertype_selector).checkedRadioButtonId)
+//                    {
+//                        R.id.deliveryman_radio -> "deliveryman"
+//                        R.id.customer_radio -> "customer"
+//                        else -> "error"
+//                    }
+//                    user.reauthenticate(EmailAuthProvider.getCredential(dialogview.findViewById<EditText>(R.id.edit_email).text.toString(), dialogview.findViewById<EditText>(R.id.edit_password).text.toString()))
+//                        .addOnSuccessListener {
+//                            ph.changeProfilePhone(dialogview.findViewById<EditText>(R.id.edit).text.toString(), type)
+//                            dialog.dismiss()
+//                        }
+//                        .addOnFailureListener {
+//                            Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
+//                        }
+//                }
+//                else
+//                {
+//                    Toast.makeText(mContext, "Not matching", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            dialogview.findViewById<Button>(R.id.cancel_button).setOnClickListener {
+//                dialog.dismiss()
+//            }
+//            dialog.setView(dialogview)
+//            dialog.setCancelable(true)
+//            dialog.show()
+//        }
         return root
     }
 
-//    fun changeProfileEmail(email: String, user: FirebaseUser) {
-//        user.updateEmail(email)
-//            .addOnSuccessListener {
-//                Toast.makeText(mContext, "Email changed successfully", Toast.LENGTH_SHORT).show()
-//            }customer
-//            .addOnFailureListener {
-//                Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-//            }
-//    }
-//
-//    fun changeProfileName(username: String, user: FirebaseUser?)
-//    {
-//        val upds = UserProfileChangeRequest.Builder().setDisplayName(username).build()
-//        user!!.updateProfile(upds)
-//            .addOnSuccessListener {
-//                Toast.makeText(mContext, "Username changed successfully", Toast.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-//            }
-//    }
-//
-//    fun changeProfilePassword(password: String, user: FirebaseUser?)
-//    {
-//        user!!.updatePassword(password)
-//            .addOnSuccessListener {
-//                Toast.makeText(mContext, "Password changed successfully", Toast.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-//            }
-//    }
-//
-//    fun changeProfilePhone(phone: String, user: FirebaseUser?)
-//    {
-//        FirebaseFirestore.getInstance().collection("customer").document("${user!!.uid}").update("phone", phone)
-//            .addOnSuccessListener {
-//                Toast.makeText(mContext, "Phone number changed successfully", Toast.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(mContext, "${it.message}", Toast.LENGTH_SHORT).show()
-//            }
-//    }
-
     override fun getCustomerSuccess(customer: User) {
         username_text.text = customer.name
-        useremail_text.text = customer.email
         userphone_text.text = customer.phone
     }
 
@@ -266,7 +221,6 @@ class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, Pr
 
     override fun getDeliverymanSuccess(deliveryman: User) {
         username_text.text = deliveryman.name
-        useremail_text.text = deliveryman.email
         userphone_text.text = deliveryman.phone
 
     }

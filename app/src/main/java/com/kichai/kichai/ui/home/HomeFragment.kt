@@ -58,7 +58,8 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        essentialRecyclerView = root.findViewById(R.id.essentials_topchart_recycler_view) as RecyclerView
+//        removing essentials
+//        essentialRecyclerView = root.findViewById(R.id.essentials_topchart_recycler_view) as RecyclerView
         categoryRecyclerView = root.findViewById(R.id.recycler_view) as RecyclerView
         booksRecyclerView = root.findViewById(R.id.recycler_view2) as RecyclerView
 
@@ -104,9 +105,15 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         var screenWidth = (dm.widthPixels.toDouble()/dm.xdpi).toInt()
 
         if(screenWidth < 5) {
-            categoryRecyclerView.layoutManager = LinearLayoutManager(
+//            categoryRecyclerView.layoutManager = LinearLayoutManager(
+//                context,
+//                LinearLayoutManager.VERTICAL,
+//                false
+//            )
+            categoryRecyclerView.layoutManager = GridLayoutManager(
                 context,
-                LinearLayoutManager.VERTICAL,
+                2,
+                GridLayoutManager.VERTICAL,
                 false
             )
         }else{
@@ -120,7 +127,8 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         categoryRecyclerView.adapter = categoryAdapter
 
         ih.getAllBooks()
-        ih.getAllEssentials()
+//        removing essentials
+//        ih.getAllEssentials()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")

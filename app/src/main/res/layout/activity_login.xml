@@ -8,11 +8,11 @@
 
 
     <EditText
-        android:id="@+id/email_text"
+        android:id="@+id/phone_text"
         android:layout_width="350dp"
         android:layout_height="53dp"
         android:ems="10"
-        android:hint="Email address"
+        android:hint="Phone number"
         android:textSize="@dimen/label_fullscreen"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,31 +22,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.314" />
 
-    <EditText
-        android:id="@+id/password_text"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="Password"
-        android:textSize="@dimen/label_fullscreen"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/email_text"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/email_text"
-        app:layout_constraintTop_toBottomOf="@+id/email_text"
-        app:layout_constraintVertical_bias="0.117" />
-
     <RadioGroup
         android:id="@+id/usertype_selector"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/email_text"
-        app:layout_constraintStart_toStartOf="@+id/email_text"
-        app:layout_constraintTop_toBottomOf="@+id/email_text"
+        app:layout_constraintEnd_toEndOf="@+id/phone_text"
+        app:layout_constraintStart_toStartOf="@+id/phone_text"
+        app:layout_constraintTop_toBottomOf="@+id/phone_text"
         app:layout_constraintVertical_bias="0.47000003">
 
         <RadioButton
@@ -71,10 +55,10 @@
         android:text="Login"
         android:textSize="@dimen/text_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/email_text"
+        app:layout_constraintEnd_toEndOf="@+id/phone_text"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/email_text"
-        app:layout_constraintTop_toBottomOf="@+id/email_text"
+        app:layout_constraintStart_toStartOf="@+id/phone_text"
+        app:layout_constraintTop_toBottomOf="@+id/phone_text"
         app:layout_constraintVertical_bias="0.683" />
 
     <TextView
@@ -84,10 +68,10 @@
         android:text="Don't have an account? Register"
         android:textSize="@dimen/text_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password_text"
+        app:layout_constraintEnd_toEndOf="@+id/phone_text"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/password_text"
-        app:layout_constraintTop_toBottomOf="@+id/password_text"
+        app:layout_constraintStart_toStartOf="@+id/phone_text"
+        app:layout_constraintTop_toBottomOf="@+id/phone_text"
         app:layout_constraintVertical_bias="0.882" />
 
     <TextView
@@ -95,27 +79,13 @@
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:gravity="left"
-        android:text="Email"
+        android:text="Phone number"
         android:textSize="@dimen/label_fullscreen"
-        app:layout_constraintBottom_toTopOf="@+id/email_text"
-        app:layout_constraintEnd_toEndOf="@+id/email_text"
+        app:layout_constraintBottom_toTopOf="@+id/phone_text"
+        app:layout_constraintEnd_toEndOf="@+id/phone_text"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/email_text"
+        app:layout_constraintStart_toStartOf="@+id/phone_text"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:gravity="left"
-        android:text="Password"
-        android:textSize="@dimen/label_fullscreen"
-        app:layout_constraintBottom_toTopOf="@+id/password_text"
-        app:layout_constraintEnd_toEndOf="@+id/password_text"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/password_text"
-        app:layout_constraintTop_toBottomOf="@+id/email_text"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -129,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="@+id/usertype_selector"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/usertype_selector"
-        app:layout_constraintTop_toBottomOf="@+id/password_text"
+        app:layout_constraintTop_toBottomOf="@+id/phone_text"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
