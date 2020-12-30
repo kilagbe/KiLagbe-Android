@@ -61,6 +61,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-firestore:22.0.1'
 
+    
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+    implementation 'com.google.firebase:firebase-auth'
+
     implementation "com.xwray:groupie:2.8.0"
     implementation "com.xwray:groupie-kotlin-android-extensions:2.8.0"
 
