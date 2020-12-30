@@ -81,13 +81,13 @@ class AuthHelper(var context: Context?) {
                         }
                         .addOnFailureListener {
                             //Show some toast message
-                            Toast.makeText(context, "Error ${it.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Failed to sign in with credentials. Error: ${it.message}", Toast.LENGTH_SHORT).show()
                         }
                 }
 
                 override fun onVerificationFailed(p0: FirebaseException) {
                     //When verification fails, show some toast message
-                    Toast.makeText(context, "Error: ${p0.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Verification failed. Error: ${p0.message}", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onCodeSent(
@@ -149,7 +149,7 @@ class AuthHelper(var context: Context?) {
                                 }
                                 .addOnFailureListener {
                                     //Show some toast message
-                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "Failed to sign in with credentials. Error: ${it.message}", Toast.LENGTH_SHORT).show()
                                 }
                         }
                         else
