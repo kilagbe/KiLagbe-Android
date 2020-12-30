@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "321646419232",
+    "project_id": "kichai-f0e7e",
+    "storage_bucket": "kichai-f0e7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321646419232:android:2bbc50883e4dec80a48b45",
+        "android_client_info": {
+          "package_name": "com.kichai.kichai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321646419232-6qg1mbr058mbjjveqrddighdoeqblcde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kichai.kichai",
+            "certificate_hash": "8ac243b356b7ea39f9979fa879431feea20ce696"
+          }
+        },
+        {
+          "client_id": "321646419232-95agkp4jc7ejc5ca9ig866aho7crk6ec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kichai.kichai",
+            "certificate_hash": "679db8e2f5721b1a86ee95d90632ef5d61f0c2bd"
+          }
+        },
+        {
+          "client_id": "321646419232-dbbhocbig7ug2g4mdg7cir1uitjo1qp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoQh45o-kSR3VOljsxj_dR4omMu8rk6QI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321646419232-dbbhocbig7ug2g4mdg7cir1uitjo1qp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
