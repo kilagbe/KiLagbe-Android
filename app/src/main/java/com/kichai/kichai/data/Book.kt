@@ -3,7 +3,7 @@ package com.kichai.kichai.data
 
 data class Book(val name: String, var price: Double) {
     var authors = arrayListOf<String>()
-    var categories =  arrayListOf<Categories>()
+    var categories =  mapOf<String, Boolean>()
     lateinit var publisher: String
     var amountInStock : Int? = null
     var photoUrl: String? = null
