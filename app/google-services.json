@@ -30,6 +30,22 @@
           }
         },
         {
+          "client_id": "321646419232-khks1end92bge1qpjj9nau79222ecppa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kichai.kichai",
+            "certificate_hash": "acaaa21449ad823567771ec94835a72d498e6620"
+          }
+        },
+        {
+          "client_id": "321646419232-s8shf531vnm0jbtvvsh8fqn5sq8o5hsc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kichai.kichai",
+            "certificate_hash": "f143418ecf8c91cee341a78d131e410a7ed0484e"
+          }
+        },
+        {
           "client_id": "321646419232-dbbhocbig7ug2g4mdg7cir1uitjo1qp0.apps.googleusercontent.com",
           "client_type": 3
         }
