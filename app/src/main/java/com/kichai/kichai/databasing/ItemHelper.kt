@@ -1,6 +1,7 @@
 package com.kichai.kichai.databasing
 
 
+import android.util.Log
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kichai.kichai.data.Book
@@ -96,8 +97,7 @@ class ItemHelper {
 
     fun getCategoryBook(category: String)
     {
-
-        FirebaseFirestore.getInstance().collection("books").whereArrayContains("categories", category).get()
+        FirebaseFirestore.getInstance().collection("books").whereEqualTo("categories.$category", true).get()
             .addOnSuccessListener {
                 if ( !it.isEmpty )
                 {
@@ -117,11 +117,12 @@ class ItemHelper {
             .addOnFailureListener {
                 mGetCategoryBookFailureListener.getCategoryBookFailure()
             }
+
     }
 
     fun getDoubleCategoryBook(cat1: String, cat2: String)
     {
-        FirebaseFirestore.getInstance().collection("books").whereArrayContainsAny("categories", listOf(cat1,cat2)).get()
+        FirebaseFirestore.getInstance().collection("books").whereEqualTo("categories.$cat1", true).whereEqualTo("categories.$cat2", true).get()
             .addOnSuccessListener {
                 if ( !it.isEmpty )
                 {

@@ -42,7 +42,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
             }
             var cats: String? = ""
             item.book.categories.forEach {
-                cats += "$it, "
+                cats += "${it.key}, "
             }
             dialogview.findViewById<TextView>(R.id.bookAuthors).text = "$authors"
             dialogview.findViewById<TextView>(R.id.bookPublishers).text = "${item.book.publisher}"
