@@ -34,4 +34,5 @@
     <dimen name="text_recycleritem_large">14sp</dimen>
 
     <dimen name="defaultPaddingMargin">10dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

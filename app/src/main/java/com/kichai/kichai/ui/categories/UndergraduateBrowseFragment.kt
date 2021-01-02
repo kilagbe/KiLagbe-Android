@@ -22,6 +22,7 @@ import com.kichai.kichai.tools.ItemOnClickListener
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_undergraduate_browse.*
 
 class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getDoubleCategoryBookSuccessListener, ItemHelper.getDoubleCategoryBookFailureListener {
 
@@ -81,6 +82,20 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
+        setButtons()
+
+    }
+
+    private fun setButtons() {
+
+        button_see_ug_med.setOnClickListener {
+//            navController.navigate(R.id.action_undergraduateBrowseFragment_to_seeAllBoooksFragment)
+            // for these classes, check java generated folder...search in youtube navigation controller safe args
+            val action = UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment("Undergraduate","Medical")
+            navController.navigate(action)
+        }
+
     }
 
     private fun initRecyclerView() {

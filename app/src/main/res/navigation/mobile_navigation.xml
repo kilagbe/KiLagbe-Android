@@ -46,7 +46,11 @@
         android:id="@+id/undergraduateBrowseFragment"
         android:name="com.kichai.kichai.ui.categories.UndergraduateBrowseFragment"
         android:label="@string/undergraduate"
-        tools:layout="@layout/fragment_undergraduate_browse" />
+        tools:layout="@layout/fragment_undergraduate_browse" >
+        <action
+            android:id="@+id/action_undergraduateBrowseFragment_to_seeAllBoooksFragment"
+            app:destination="@id/seeAllBoooksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postGraduateBrowseFragment"
         android:name="com.kichai.kichai.ui.categories.PostGraduateBrowseFragment"
@@ -77,5 +81,18 @@
         android:name="com.kichai.kichai.ui.customer_order_fragment.CustomerOrderMenuFragment"
         android:label="@string/my_orders"
         tools:layout="@layout/fragment_customer_order_menu" />
+    <fragment
+        android:id="@+id/seeAllBoooksFragment"
+        android:name="com.kichai.kichai.ui.categories.SeeAllBoooksFragment"
+        android:label="fragment_see_all_boooks"
+        tools:layout="@layout/fragment_see_all_boooks" >
+        <argument
+            android:name="cat1"
+            app:argType="string" />
+        <argument
+            android:name="cat2"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

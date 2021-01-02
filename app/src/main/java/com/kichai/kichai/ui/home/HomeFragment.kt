@@ -111,14 +111,14 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
 //                false
 //            )
             categoryRecyclerView.layoutManager = GridLayoutManager(
-                context,
+                mContext,
                 2,
                 GridLayoutManager.VERTICAL,
                 false
             )
         }else{
             categoryRecyclerView.layoutManager = GridLayoutManager(
-                context,
+                mContext,
                 2,
                 GridLayoutManager.VERTICAL,
                 false
