@@ -20,6 +20,7 @@ import com.kichai.kichai.tools.ItemOnClickListener
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_literature_browse.*
 
 
 class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getCategoryBookFailureListener, ItemHelper.getCategoryBookSuccessListener {
@@ -75,6 +76,14 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, I
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        button_see_lit.setOnClickListener {
+            val action = LiteratureBrowseFragmentDirections.actionLiteratureBrowseFragmentToSeeAllBoooksFragment("Literature", null)
+            navController.navigate(action)
+        }
     }
 
 

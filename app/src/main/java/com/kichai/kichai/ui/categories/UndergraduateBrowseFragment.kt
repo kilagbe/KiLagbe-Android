@@ -83,16 +83,24 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        setButtons()
-
+        setupButtons()
     }
 
-    private fun setButtons() {
+    private fun setupButtons() {
 
-        button_see_ug_med.setOnClickListener {
 //            navController.navigate(R.id.action_undergraduateBrowseFragment_to_seeAllBoooksFragment)
-            // for these classes, check java generated folder...search in youtube navigation controller safe args
+
+//            for these classes, check java generated folder...search in youtube navigation controller safe args
+        button_see_ug_med.setOnClickListener {
             val action = UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment("Undergraduate","Medical")
+            navController.navigate(action)
+        }
+        button_see_ug_eng.setOnClickListener {
+            val action = UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment("Undergraduate","Engineering")
+            navController.navigate(action)
+        }
+        button_see_ug_bba.setOnClickListener {
+            val action = UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment("Undergraduate","BBA")
             navController.navigate(action)
         }
 

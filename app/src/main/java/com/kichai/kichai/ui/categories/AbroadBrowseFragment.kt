@@ -22,6 +22,7 @@ import com.kichai.kichai.tools.ItemOnClickListener
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_abroad_browse.*
 
 
 class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getCategoryBookSuccessListener, ItemHelper.getCategoryBookFailureListener {
@@ -74,6 +75,14 @@ class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        button_see_abroad.setOnClickListener {
+            val action = AbroadBrowseFragmentDirections.actionAbroadBrowseFragmentToSeeAllBoooksFragment("Abroad", null)
+            navController.navigate(action)
+        }
     }
 
     private fun initRecyclerView() {

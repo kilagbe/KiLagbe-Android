@@ -55,27 +55,47 @@
         android:id="@+id/postGraduateBrowseFragment"
         android:name="com.kichai.kichai.ui.categories.PostGraduateBrowseFragment"
         android:label="@string/postgraduate"
-        tools:layout="@layout/fragment_post_graduate_browse" />
+        tools:layout="@layout/fragment_post_graduate_browse" >
+        <action
+            android:id="@+id/action_postGraduateBrowseFragment_to_seeAllBoooksFragment"
+            app:destination="@id/seeAllBoooksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/englishMediumBrowseFragment"
         android:name="com.kichai.kichai.ui.categories.EnglishMediumBrowseFragment"
         android:label="@string/english_medium"
-        tools:layout="@layout/fragment_english_medium_browse" />
+        tools:layout="@layout/fragment_english_medium_browse" >
+        <action
+            android:id="@+id/action_englishMediumBrowseFragment_to_seeAllBoooksFragment"
+            app:destination="@id/seeAllBoooksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nctbBrowseFragment"
         android:name="com.kichai.kichai.ui.categories.NctbBrowseFragment"
         android:label="@string/nctb"
-        tools:layout="@layout/fragment_nctb_browse" />
+        tools:layout="@layout/fragment_nctb_browse" >
+        <action
+            android:id="@+id/action_nctbBrowseFragment_to_seeAllBoooksFragment"
+            app:destination="@id/seeAllBoooksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/abroadBrowseFragment"
         android:name="com.kichai.kichai.ui.categories.AbroadBrowseFragment"
         android:label="@string/abroad"
-        tools:layout="@layout/fragment_abroad_browse" />
+        tools:layout="@layout/fragment_abroad_browse" >
+        <action
+            android:id="@+id/action_abroadBrowseFragment_to_seeAllBoooksFragment"
+            app:destination="@id/seeAllBoooksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/literatureBrowseFragment"
         android:name="com.kichai.kichai.ui.categories.LiteratureBrowseFragment"
         android:label="@string/literature"
-        tools:layout="@layout/fragment_literature_browse" />
+        tools:layout="@layout/fragment_literature_browse" >
+        <action
+            android:id="@+id/action_literatureBrowseFragment_to_seeAllBoooksFragment"
+            app:destination="@id/seeAllBoooksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_orders"
         android:name="com.kichai.kichai.ui.customer_order_fragment.CustomerOrderMenuFragment"

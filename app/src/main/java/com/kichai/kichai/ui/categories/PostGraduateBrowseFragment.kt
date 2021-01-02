@@ -23,6 +23,7 @@ import com.kichai.kichai.tools.ItemOnClickListener
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_post_graduate_browse.*
 
 
 class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
@@ -88,6 +89,23 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        button_see_pg_med.setOnClickListener {
+            val action = PostGraduateBrowseFragmentDirections.actionPostGraduateBrowseFragmentToSeeAllBoooksFragment("Postgraduate","Medical")
+            navController.navigate(action)
+        }
+        button_see_pg_eng.setOnClickListener {
+            val action = PostGraduateBrowseFragmentDirections.actionPostGraduateBrowseFragmentToSeeAllBoooksFragment("Postgraduate","Engineering")
+            navController.navigate(action)
+        }
+        button_see_pg_mba.setOnClickListener {
+            val action = PostGraduateBrowseFragmentDirections.actionPostGraduateBrowseFragmentToSeeAllBoooksFragment("Postgraduate","MBA")
+            navController.navigate(action)
+        }
     }
 
 

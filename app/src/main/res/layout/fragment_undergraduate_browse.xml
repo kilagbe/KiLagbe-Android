@@ -89,20 +89,51 @@
 
             <Button
                 android:id="@+id/button_see_ug_med"
-                android:background="@drawable/rounded_background_gradient"
-                android:textColor="@color/White"
-                android:paddingHorizontal="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
+                android:background="@drawable/rounded_background_gradient"
+                android:paddingHorizontal="24dp"
                 android:text="@string/see_more"
+                android:textColor="@color/White"
                 android:textSize="@dimen/label_12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/undergraduate_medical_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/undergraduate_medical_text_view"
                 app:layout_constraintTop_toTopOf="@+id/undergraduate_medical_text_view" />
+
+            <Button
+                android:id="@+id/button_see_ug_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background_gradient"
+                android:paddingHorizontal="24dp"
+                android:text="@string/see_more"
+                android:textColor="@color/White"
+                android:textSize="@dimen/label_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/undergraduate_engineering_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/button_see_ug_med"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/button_see_ug_med"
+                app:layout_constraintTop_toTopOf="@+id/undergraduate_engineering_text_view" />
+
+            <Button
+                android:id="@+id/button_see_ug_bba"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background_gradient"
+                android:paddingHorizontal="24dp"
+                android:text="@string/see_more"
+                android:textColor="@color/White"
+                android:textSize="@dimen/label_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/undergraduate_bba_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/button_see_ug_eng"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/button_see_ug_eng"
+                app:layout_constraintTop_toTopOf="@+id/undergraduate_bba_text_view" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,13 +26,13 @@ class SeeAllBoooksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments!=null) {
-            val args = SeeAllBoooksFragmentArgs.fromBundle(requireArguments())
-            cat1 = args.cat1
-            cat2 = args.cat2!!
-        }
+        val args = SeeAllBoooksFragmentArgs.fromBundle(requireArguments())
+        cat1 = args.cat1
+        cat2 = args.cat2.toString()     // if null, converted to string "null"
 
-        var s : String = cat1 + " " +cat2
+        var s : String = cat1
+        if(cat2 != "null")  s = "$s $cat2"
+
         textView.text = s
     }
 }

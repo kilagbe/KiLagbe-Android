@@ -20,6 +20,7 @@ import com.kichai.kichai.tools.ItemOnClickListener
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_english_medium_browse.*
 
 
 class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getCategoryBookSuccessListener, ItemHelper.getCategoryBookFailureListener {
@@ -74,6 +75,15 @@ class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        button_see_em.setOnClickListener {
+            val action = EnglishMediumBrowseFragmentDirections.actionEnglishMediumBrowseFragmentToSeeAllBoooksFragment("EnglishMedium",null)
+            navController.navigate(action)
+        }
     }
 
 
