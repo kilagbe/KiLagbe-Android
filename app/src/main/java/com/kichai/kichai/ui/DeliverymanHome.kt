@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.kichai.kichai.R
+import kotlinx.android.synthetic.main.activity_customer_home.*
 
 class DeliverymanHome : AppCompatActivity() {
 
@@ -28,6 +29,21 @@ class DeliverymanHome : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         nav.setupWithNavController(navController)
+
+        val drawerToggle: ActionBarDrawerToggle= object :ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            (R.string.navigation_drawer_open)   ,
+            (R.string.navigation_drawer_close)
+        )
+        {
+
+        }
+        drawerToggle.isDrawerIndicatorEnabled=true
+        drawer.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
     }
 
 }
