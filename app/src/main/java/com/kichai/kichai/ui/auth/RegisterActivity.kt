@@ -11,12 +11,12 @@ import com.kichai.kichai.ui.CustomerHome
 import com.kichai.kichai.ui.DeliverymanHome
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationSuccessListener, AuthHelper.onCustomerRegistrationFailureListener, AuthHelper.onCustomerLoginSuccessListener, AuthHelper.onDeliverymanLoginSuccessListener,CountryCodePicker.OnCountryChangeListener {
+class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationSuccessListener, AuthHelper.onCustomerRegistrationFailureListener, AuthHelper.onCustomerLoginSuccessListener, AuthHelper.onDeliverymanLoginSuccessListener, CountryCodePicker.OnCountryChangeListener {
 
     lateinit var ah: AuthHelper
-    private var ccp: CountryCodePicker?=null
-    private var countryCode:String?=null
-    private var countryName:String?=null
+    private var ccp: CountryCodePicker? = null
+    private var countryCode:String? = null
+    private var countryName:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,22 +35,16 @@ class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationS
         }
         register_button.setOnClickListener {
             if (phone_text.text.toString().isNotEmpty()) {
-                countryCode=ccp!!.selectedCountryCode
-
-                ah.authWithPhoneNumber(phone_text.text.toString(), 0, 0)
-
-                Toast.makeText(this,countryCode+phone_text.text.toString(),Toast.LENGTH_SHORT).show()
+                countryCode = ccp!!.selectedCountryCode
+                ah.authWithPhoneNumber("+" + countryCode + phone_text.text.toString(), 0, 0)
             }
         }
-        ccp = findViewById(R.id.ccp)
+        ccp = findViewById(R.id.countryCodePicker)
         ccp!!.setOnCountryChangeListener(this)
     }
     override fun onCountrySelected() {
-        countryCode=ccp!!.selectedCountryCode
-        countryName=ccp!!.selectedCountryName
-
-        Toast.makeText(this,"Country Code "+countryCode,Toast.LENGTH_SHORT).show()
-        Toast.makeText(this,"Country Name "+countryName,Toast.LENGTH_SHORT).show()
+        countryCode = ccp!!.selectedCountryCode
+        countryName = ccp!!.selectedCountryName
     }
 
     override fun customerRegistrationSuccess() {

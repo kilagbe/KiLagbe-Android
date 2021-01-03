@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.hbb20.CountryCodePicker
 import com.kichai.kichai.R
 import com.kichai.kichai.databasing.AuthHelper
 import com.kichai.kichai.ui.CustomerHome
@@ -14,9 +15,12 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.phone_text
 import kotlinx.android.synthetic.main.activity_register.*
 
-class LoginActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationSuccessListener, AuthHelper.onCustomerRegistrationFailureListener, AuthHelper.onCustomerLoginSuccessListener, AuthHelper.onDeliverymanLoginSuccessListener {
+class LoginActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationSuccessListener, AuthHelper.onCustomerRegistrationFailureListener, AuthHelper.onCustomerLoginSuccessListener, AuthHelper.onDeliverymanLoginSuccessListener, CountryCodePicker.OnCountryChangeListener {
 
     lateinit var ah: AuthHelper
+    private var ccp: CountryCodePicker? = null
+    private var countryCode:String? = null
+    private var countryName:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +40,20 @@ class LoginActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationSucc
 
         login_button.setOnClickListener {
             if (phone_text.text.toString().isNotEmpty()) {
+                countryCode = ccp!!.selectedCountryCode
                 if ( usertype_selector.checkedRadioButtonId == R.id.customer_radio )
-                    ah.authWithPhoneNumber(phone_text.text.toString(), 1, 0)
+                    ah.authWithPhoneNumber("+" + countryCode + phone_text.text.toString(), 1, 0)
                 else if ( usertype_selector.checkedRadioButtonId == R.id.deliveryman_radio )
-                    ah.authWithPhoneNumber(phone_text.text.toString(), 1, 1)
+                    ah.authWithPhoneNumber("+" + countryCode + phone_text.text.toString(), 1, 1)
             }
         }
+        ccp = findViewById(R.id.countryCodePicker)
+        ccp!!.setOnCountryChangeListener(this)
+    }
+
+    override fun onCountrySelected() {
+        countryCode = ccp!!.selectedCountryCode
+        countryName = ccp!!.selectedCountryName
     }
 
     override fun customerRegistrationSuccess() {
