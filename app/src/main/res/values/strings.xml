@@ -20,6 +20,7 @@
     <string name="book_categories">Book Categories</string>
     <string name="books_top_chart">Books Top Chart</string>
     <string name="top_chart">Top Chart</string>
+    <string name="all_books">All Books</string>
     <string name="undergraduate">Undergraduate</string>
     <string name="postgraduate">Postgraduate</string>
     <string name="english_medium">English Medium</string>
@@ -33,6 +34,7 @@
 
 
     <string name="see_more">See More</string>
+    <string name="loading">Loading…</string>
 
     <string-array name="category_names">
         <item>Undergraduate</item>

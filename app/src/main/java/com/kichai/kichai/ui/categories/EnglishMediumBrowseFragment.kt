@@ -76,14 +76,6 @@ class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        setupButtons()
-    }
-
-    private fun setupButtons() {
-        button_see_em.setOnClickListener {
-            val action = EnglishMediumBrowseFragmentDirections.actionEnglishMediumBrowseFragmentToSeeAllBoooksFragment("EnglishMedium",null)
-            navController.navigate(action)
-        }
     }
 
 
