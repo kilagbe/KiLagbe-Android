@@ -35,17 +35,22 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
             dialog = AlertDialog.Builder(context).create()
             val dialogview = layoutInflater.inflate(R.layout.book_display, null)
             Picasso.get().load(item.book.photoUrl).into(dialogview.findViewById<ImageView>(R.id.bookMainImg))
-            dialogview.findViewById<TextView>(R.id.bookName).text = "${item.book.name}"
+            dialogview.findViewById<TextView>(R.id.bookName).text = item.book.name
+
             var authors: String? = ""
             item.book.authors.forEach {
                 authors += "$it, "
             }
+            authors = authors?.dropLast(2)
+
             var cats: String? = ""
             item.book.categories.forEach {
                 cats += "${it.key}, "
             }
+            cats = cats?.dropLast(2)
+
             dialogview.findViewById<TextView>(R.id.bookAuthors).text = "$authors"
-            dialogview.findViewById<TextView>(R.id.bookPublishers).text = "${item.book.publisher}"
+            dialogview.findViewById<TextView>(R.id.bookPublishers).text = item.book.publisher
             dialogview.findViewById<TextView>(R.id.bookCategories).text = "$cats"
             dialogview.findViewById<TextView>(R.id.bookPrice).text = "${item.book.price}"
 
@@ -86,8 +91,8 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
             dialog = AlertDialog.Builder(context).create()
             val dialogview = layoutInflater.inflate(R.layout.essential_display, null)
             Picasso.get().load(item.essential.photoUrl).into(dialogview.findViewById<ImageView>(R.id.essentialMainImg))
-            dialogview.findViewById<TextView>(R.id.essentialName).text = "${item.essential.name}"
-            dialogview.findViewById<TextView>(R.id.essentialStock).text = "${item.essential.amountInStock.toString()}"
+            dialogview.findViewById<TextView>(R.id.essentialName).text = item.essential.name
+            dialogview.findViewById<TextView>(R.id.essentialStock).text = item.essential.amountInStock.toString()
             dialogview.findViewById<TextView>(R.id.essentialManufacturer).text = "${item.essential.manufacturer}"
 
             dialogview.findViewById<Button>(R.id.inc_button).setOnClickListener {
