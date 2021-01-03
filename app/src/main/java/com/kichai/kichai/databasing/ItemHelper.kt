@@ -1,7 +1,6 @@
 package com.kichai.kichai.databasing
 
 
-import android.util.Log
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kichai.kichai.data.Book

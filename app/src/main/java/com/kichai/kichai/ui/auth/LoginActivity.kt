@@ -4,16 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.hbb20.CountryCodePicker
 import com.kichai.kichai.R
 import com.kichai.kichai.databasing.AuthHelper
 import com.kichai.kichai.ui.CustomerHome
 import com.kichai.kichai.ui.DeliverymanHome
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.phone_text
-import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationSuccessListener, AuthHelper.onCustomerRegistrationFailureListener, AuthHelper.onCustomerLoginSuccessListener, AuthHelper.onDeliverymanLoginSuccessListener, CountryCodePicker.OnCountryChangeListener {
 

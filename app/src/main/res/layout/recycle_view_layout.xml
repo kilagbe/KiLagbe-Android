@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -9,8 +8,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     app:cardCornerRadius="@dimen/cardview_custom_corner_radius"
-    app:cardElevation="@dimen/cardview_custom_elevation"
-    >
+    app:cardElevation="@dimen/cardview_custom_elevation">
     <!--    android:background="#f2f2f2"-->
 <!--    android:layout_height="@dimen/cardview_custom_height"-->
     <!--    android:layout_width="@dimen/cardview_custom_width"-->

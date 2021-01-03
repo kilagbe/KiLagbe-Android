@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.kichai.kichai.R
-import kotlinx.android.synthetic.main.activity_customer_home.*
+import kotlinx.android.synthetic.main.activity_deliveryman_home.*
 
 class DeliverymanHome : AppCompatActivity() {
 

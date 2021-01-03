@@ -1,7 +1,6 @@
 package com.kichai.kichai.ui.categories
 
 import android.annotation.SuppressLint
-import android.app.ActionBar
 import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
