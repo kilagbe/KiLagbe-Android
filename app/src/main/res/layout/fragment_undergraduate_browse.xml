@@ -29,7 +29,9 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/medical"
-                android:textSize="@dimen/label_fullscreen"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/label_20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +53,9 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/engineering"
-                android:textSize="@dimen/label_fullscreen"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/label_20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/undergraduate_medical_recycler_view" />
 
@@ -73,7 +77,9 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/bba"
-                android:textSize="@dimen/label_fullscreen"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/label_20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/undergraduate_engineering_recycler_view" />
 

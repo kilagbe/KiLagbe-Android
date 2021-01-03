@@ -25,8 +25,12 @@
     <string name="postgraduate">Postgraduate</string>
     <string name="english_medium">English Medium</string>
     <string name="nctb">NCTB</string>
+    <string name="hsc">HSC</string>
+    <string name="ssc">SSC</string>
     <string name="abroad">Abroad</string>
     <string name="literature">Literature</string>
+    <string name="literature_bangla">Literature Bangla</string>
+    <string name="literature_english">Literature English</string>
     <string name="medical">Medical</string>
     <string name="engineering">Engineering</string>
     <string name="bba">BBA</string>
