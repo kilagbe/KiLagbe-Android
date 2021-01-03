@@ -12,7 +12,7 @@
     <style name="Autocomplete">
         <item name="colorControlNormal">@color/White</item>
 
-        <item name="colorControlActivated">@color/Red</item>
+        <item name="colorControlActivated">@color/colorSecondary</item>
 
     </style>
 

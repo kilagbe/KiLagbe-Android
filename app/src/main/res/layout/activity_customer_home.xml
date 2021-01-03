@@ -39,7 +39,7 @@
             android:hint="Search for books"
             android:padding="@dimen/defaultPaddingMargin"
             android:shadowRadius="@integer/config_navAnimTime"
-            android:drawableTint="@color/Red"
+            android:drawableTint="@color/Gray"
 
             >
 

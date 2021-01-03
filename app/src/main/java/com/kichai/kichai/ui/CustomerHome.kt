@@ -81,7 +81,6 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
             if(hasFocus){
                 actv.background=ResourcesCompat.getDrawable(resources,R.drawable.rounded_background_text_darkborder,null)
             }
-
         }
 
     }
