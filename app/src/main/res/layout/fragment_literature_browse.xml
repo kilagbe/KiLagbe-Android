@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/literature_top_chart_text_view"
+            android:id="@+id/literature_bangla_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -31,20 +31,23 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/literature_top_chart_recycler_view"
+            android:id="@+id/literature_bangla_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recyclerview_parent_custom_height_books"
-            android:layout_marginTop="8dp"
-            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
+            android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/literature_top_chart_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/literature_bangla_text_view"
+            app:layout_constraintVertical_bias="0.0" />
 
 
         <Button
-            android:id="@+id/button_see_lit"
+            android:id="@+id/button_see_lit_bangla"
             android:background="@drawable/rounded_background_gradient"
             android:textColor="@color/White"
             android:textSize="@dimen/label_12sp"
@@ -54,11 +57,51 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:text="@string/see_more"
-            app:layout_constraintBottom_toBottomOf="@+id/literature_top_chart_text_view"
+            app:layout_constraintBottom_toBottomOf="@+id/literature_bangla_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/literature_top_chart_text_view"
-            app:layout_constraintTop_toTopOf="@+id/literature_top_chart_text_view" />
+            app:layout_constraintStart_toEndOf="@+id/literature_bangla_text_view"
+            app:layout_constraintTop_toTopOf="@+id/literature_bangla_text_view" />
+
+        <TextView
+            android:id="@+id/literature_english_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/literature_english"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/label_20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/literature_bangla_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/literature_bangla_recycler_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/literature_english_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/literature_bangla_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/literature_bangla_recycler_view"
+            app:layout_constraintTop_toBottomOf="@+id/literature_english_text_view"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button_see_lit_eng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/see_more"
+            android:background="@drawable/rounded_background_gradient"
+            android:textColor="@color/White"
+            android:textSize="@dimen/label_12sp"
+            android:paddingHorizontal="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/literature_english_text_view"
+            app:layout_constraintEnd_toEndOf="@+id/button_see_lit_bangla"
+            app:layout_constraintStart_toStartOf="@+id/button_see_lit_bangla"
+            app:layout_constraintTop_toTopOf="@+id/literature_english_text_view" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

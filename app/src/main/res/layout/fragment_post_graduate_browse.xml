@@ -33,7 +33,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postgraduate_medical_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recyclerview_parent_custom_height_books_2"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             android:padding="5dp"
@@ -57,7 +57,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postgraduate_engineering_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recyclerview_parent_custom_height_books_2"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             android:padding="5dp"
@@ -81,10 +81,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postgraduate_mba_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recyclerview_parent_custom_height_books_2"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
             android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postgraduate_mba_text_view" />
 

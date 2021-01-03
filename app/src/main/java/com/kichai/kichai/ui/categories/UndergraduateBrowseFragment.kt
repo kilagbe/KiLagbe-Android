@@ -107,7 +107,6 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     }
 
     private fun initRecyclerView() {
-
         ih.getDoubleCategoryBook("Undergraduate", "Medical")
         ih.getDoubleCategoryBook("Undergraduate", "Engineering")
         ih.getDoubleCategoryBook("Undergraduate", "BBA")

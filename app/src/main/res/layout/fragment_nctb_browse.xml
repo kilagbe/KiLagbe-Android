@@ -17,7 +17,7 @@
 
 
         <TextView
-            android:id="@+id/nctb_top_chart_text_view"
+            android:id="@+id/nctb_hsc_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -32,20 +32,21 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/nctb_top_chart_recycler_view"
+            android:id="@+id/nctb_hsc_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recyclerview_parent_custom_height_books"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:padding="5dp"
             android:orientation="vertical"
+            android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nctb_top_chart_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/nctb_hsc_textView"
+            app:layout_constraintVertical_bias="0.0" />
 
 
         <Button
-            android:id="@+id/button_see_nctb"
+            android:id="@+id/button_see_nctb_hsc"
             android:background="@drawable/rounded_background_gradient"
             android:textColor="@color/White"
             android:textSize="@dimen/label_12sp"
@@ -55,11 +56,51 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:text="@string/see_more"
-            app:layout_constraintBottom_toBottomOf="@+id/nctb_top_chart_text_view"
+            app:layout_constraintBottom_toBottomOf="@+id/nctb_hsc_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/nctb_top_chart_text_view"
-            app:layout_constraintTop_toTopOf="@+id/nctb_top_chart_text_view" />
+            app:layout_constraintStart_toEndOf="@+id/nctb_hsc_textView"
+            app:layout_constraintTop_toTopOf="@+id/nctb_hsc_textView" />
+
+        <TextView
+            android:id="@+id/nctb_ssc_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/ssc"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/label_20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/nctb_hsc_textView"
+            app:layout_constraintTop_toBottomOf="@+id/nctb_hsc_recyclerView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nctb_ssc_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/nctb_hsc_recyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/nctb_ssc_textView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button_see_nctb_ssc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/see_more"
+            android:background="@drawable/rounded_background_gradient"
+            android:textColor="@color/White"
+            android:paddingHorizontal="24dp"
+            android:textSize="@dimen/label_12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/nctb_ssc_textView"
+            app:layout_constraintEnd_toEndOf="@+id/button_see_nctb_hsc"
+            app:layout_constraintStart_toStartOf="@+id/button_see_nctb_hsc"
+            app:layout_constraintTop_toTopOf="@+id/nctb_ssc_textView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.kichai.kichai.ui.categories
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
@@ -97,11 +99,31 @@ class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     @SuppressLint("UseRequireInsteadOfGet")
     override fun getCategoryBookSuccess(bookArray: ArrayList<Book>) {
         val englishMediumTopChartAdapter = GroupAdapter<GroupieViewHolder>()
+
+        //Finding device width to decide whether to choose GridLayout spanCount
+        val gridSpanCount:Int
+        val dm = DisplayMetrics()
+        activity?.windowManager!!.defaultDisplay.getMetrics(dm)
+        val screenWidth = (dm.widthPixels.toDouble() / dm.xdpi).toInt()
+        gridSpanCount = if(screenWidth < 5) {
+            2
+        }else{
+            4
+        }
+
         bookArray.forEach {
             englishMediumTopChartAdapter.add(BookAdapter(it))
         }
-        englishMediumTopChartRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
+
         englishMediumTopChartRecyclerView.adapter = englishMediumTopChartAdapter
+//        englishMediumTopChartRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
+        englishMediumTopChartRecyclerView.layoutManager = GridLayoutManager(
+            context,
+            gridSpanCount,
+            GridLayoutManager.VERTICAL,
+            false
+        )
+
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         englishMediumTopChartAdapter.setOnItemClickListener(listener)

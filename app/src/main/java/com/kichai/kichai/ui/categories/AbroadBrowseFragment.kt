@@ -97,27 +97,26 @@ class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
             abroadTopChartAdapter.add(BookAdapter(it))
         }
 
+        //Finding device width to decide whether to choose GridLayout spanCount
+        val gridSpanCount:Int
         val dm = DisplayMetrics()
         activity?.windowManager!!.defaultDisplay.getMetrics(dm)
-        var screenWidth = (dm.widthPixels.toDouble()/dm.xdpi).toInt()
-        if(screenWidth < 5) {
-            abroadTopChatRecyclerView.layoutManager = GridLayoutManager(
-                context,
-                2,
-                GridLayoutManager.VERTICAL,
-                false
-            )
+        val screenWidth = (dm.widthPixels.toDouble() / dm.xdpi).toInt()
+        gridSpanCount = if(screenWidth < 5) {
+            2
         }else{
-            abroadTopChatRecyclerView.layoutManager = GridLayoutManager(
-                context,
-                4,
-                GridLayoutManager.VERTICAL,
-                false
-            )
+            4
         }
 
 //        abroadTopChatRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
         abroadTopChatRecyclerView.adapter = abroadTopChartAdapter
+        abroadTopChatRecyclerView.layoutManager = GridLayoutManager(
+            context,
+            gridSpanCount,
+            GridLayoutManager.VERTICAL,
+            false
+        )
+
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         abroadTopChartAdapter.setOnItemClickListener(listener)
