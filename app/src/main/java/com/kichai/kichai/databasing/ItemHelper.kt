@@ -15,6 +15,9 @@ class ItemHelper {
     private lateinit var mGetAllBooksSuccessListener: getAllBooksSuccessListener
     private lateinit var mGetAllBooksFailureListener: getAllBooksFailureListener
 
+    private lateinit var mGetSomeBooksSuccessListener: getSomeBooksSuccessListener
+    private lateinit var mGetSomeBooksFailureListener: getSomeBooksFailureListener
+
     private lateinit var mGetAllEssentialsSuccessListener: getAllEssentialsSuccessListener
     private lateinit var mGetAllEssentialsFailureListener: getAllEssentialsFailureListener
 
@@ -168,6 +171,30 @@ class ItemHelper {
             }
     }
 
+    fun getSomeBooks(n: Long)
+    {
+        FirebaseFirestore.getInstance().collection("books").limit(n).get()
+            .addOnSuccessListener {
+                if ( !it.isEmpty )
+                {
+                    var tempArray = arrayListOf<Book>()
+                    for ( doc in it )
+                    {
+                        val temp = doc.toObject(Book::class.java)
+                        tempArray.add(temp)
+                    }
+                    mGetSomeBooksSuccessListener.getSomeBooksSuccess(tempArray)
+                }
+                else
+                {
+                    mGetSomeBooksFailureListener.getSomeBooksFailure()
+                }
+            }
+            .addOnFailureListener {
+                mGetSomeBooksFailureListener.getSomeBooksFailure()
+            }
+    }
+
     fun getAllEssentials()
     {
         FirebaseFirestore.getInstance().collection("essentials").get()
@@ -231,6 +258,16 @@ class ItemHelper {
     fun setGetAllBooksFailureListener(lol: getAllBooksFailureListener)
     {
         this.mGetAllBooksFailureListener = lol
+    }
+
+    fun setGetSomeBooksSuccessListener(lol: getSomeBooksSuccessListener)
+    {
+        this.mGetSomeBooksSuccessListener = lol
+    }
+
+    fun setGetSomeBooksFailureListener(lol: getSomeBooksFailureListener)
+    {
+        this.mGetSomeBooksFailureListener = lol
     }
 
     fun setGetEssentialSuccessListener(lol: getEssentialSuccessListener)
@@ -307,6 +344,16 @@ class ItemHelper {
     interface getAllBooksFailureListener
     {
         fun getAllBooksFailure()
+    }
+
+    interface getSomeBooksSuccessListener
+    {
+        fun getSomeBooksSuccess(bookArray: ArrayList<Book>)
+    }
+
+    interface getSomeBooksFailureListener
+    {
+        fun getSomeBooksFailure()
     }
 
     interface getEssentialSuccessListener

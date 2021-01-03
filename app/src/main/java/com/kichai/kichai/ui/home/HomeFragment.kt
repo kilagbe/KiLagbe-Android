@@ -29,7 +29,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
 
-class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getAllEssentialsSuccessListener, ItemHelper.getAllEssentialsFailureListener, ItemHelper.getAllBooksSuccessListener, ItemHelper.getAllBooksFailureListener{
+class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getAllEssentialsSuccessListener, ItemHelper.getAllEssentialsFailureListener, ItemHelper.getSomeBooksSuccessListener, ItemHelper.getSomeBooksFailureListener{
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onExit() {
@@ -69,10 +69,10 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
         ih = ItemHelper()
-        ih.setGetAllBooksSuccessListener(this)
-        ih.setGetAllBooksFailureListener(this)
-        ih.setGetAllEssentialsSuccessListener(this)
-        ih.setGetAllEssentialsFailureListener(this)
+        ih.setGetSomeBooksSuccessListener(this)
+        ih.setGetSomeBooksFailureListener(this)
+//        ih.setGetAllEssentialsSuccessListener(this)
+//        ih.setGetAllEssentialsFailureListener(this)
 
         mContext = this.context!!
 
@@ -126,13 +126,13 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         }
         categoryRecyclerView.adapter = categoryAdapter
 
-        ih.getAllBooks()
+        ih.getSomeBooks(7)
 //        removing essentials
 //        ih.getAllEssentials()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
-    override fun getAllBooksSuccess(bookArray: ArrayList<Book>) {
+    override fun getSomeBooksSuccess(bookArray: ArrayList<Book>) {
         val booksAdapter = GroupAdapter<GroupieViewHolder>()
         bookArray.forEach {
             booksAdapter.add(BookAdapter(it))
@@ -174,7 +174,7 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
-    override fun getAllBooksFailure() {
+    override fun getSomeBooksFailure() {
         Toast.makeText(mContext, "Failed to get all books", Toast.LENGTH_SHORT).show()
     }
 
