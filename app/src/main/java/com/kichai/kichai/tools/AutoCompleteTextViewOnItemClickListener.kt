@@ -42,7 +42,7 @@ class AutoCompleteTextViewOnItemClickListener(val context: Context) : AdapterVie
         dialogview.findViewById<TextView>(R.id.bookAuthors).text = "$authors"
         dialogview.findViewById<TextView>(R.id.bookPublishers).text = "${item.publisher}"
         dialogview.findViewById<TextView>(R.id.bookCategories).text = "$cats"
-        dialogview.findViewById<TextView>(R.id.bookStock).text = "${item.amountInStock}"
+        dialogview.findViewById<TextView>(R.id.bookPrice).text = "${item.amountInStock}"
 
         dialogview.findViewById<Button>(R.id.inc_button).setOnClickListener {
             var q = dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt()

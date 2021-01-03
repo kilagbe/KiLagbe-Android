@@ -47,7 +47,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
             dialogview.findViewById<TextView>(R.id.bookAuthors).text = "$authors"
             dialogview.findViewById<TextView>(R.id.bookPublishers).text = "${item.book.publisher}"
             dialogview.findViewById<TextView>(R.id.bookCategories).text = "$cats"
-            dialogview.findViewById<TextView>(R.id.bookStock).text = "${item.book.amountInStock}"
+            dialogview.findViewById<TextView>(R.id.bookPrice).text = "${item.book.price}"
 
             dialogview.findViewById<Button>(R.id.inc_button).setOnClickListener {
                 var q = dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt()

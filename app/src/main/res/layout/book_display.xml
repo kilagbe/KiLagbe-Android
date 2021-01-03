@@ -62,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/bookPublishers" />
 
         <TextView
-            android:id="@+id/bookStock"
+            android:id="@+id/bookPrice"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -97,7 +97,7 @@
             android:textSize="@dimen/text_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toStartOf="@+id/bookStock"
+            app:layout_constraintStart_toStartOf="@+id/bookPrice"
             app:layout_constraintTop_toBottomOf="@+id/quantity_text" />
 
         <TextView
@@ -107,7 +107,7 @@
             android:gravity="center"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="@+id/dec_button"
-            app:layout_constraintEnd_toEndOf="@+id/bookStock"
+            app:layout_constraintEnd_toEndOf="@+id/bookPrice"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/dec_button"
             app:layout_constraintTop_toTopOf="@+id/dec_button"
@@ -129,10 +129,10 @@
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:text="-"
-            app:layout_constraintEnd_toEndOf="@+id/bookStock"
+            app:layout_constraintEnd_toEndOf="@+id/bookPrice"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/bookStock"
-            app:layout_constraintTop_toBottomOf="@+id/bookStock" />
+            app:layout_constraintStart_toStartOf="@+id/bookPrice"
+            app:layout_constraintTop_toBottomOf="@+id/bookPrice" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
