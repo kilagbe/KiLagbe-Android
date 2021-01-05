@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        >
+        android:padding="24dp">
 
 
         <ImageView
@@ -186,9 +184,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Unit Price:"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/label_18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView8"

@@ -24,20 +24,21 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_undergraduate_browse.*
 
-class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getDoubleCategoryBookSuccessListener, ItemHelper.getDoubleCategoryBookFailureListener {
+class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
+    ItemOnClickListener.onExitListener, ItemHelper.getSomeDoubleCategoryBookSuccessListener,
+    ItemHelper.getSomeDoubleCategoryBookFailureListener {
 
 
     private lateinit var undergradMedicalRecyclerView: RecyclerView
     private lateinit var undergradEngineeringRecyclerView: RecyclerView
     private lateinit var undergradBbaRecyclerView: RecyclerView
 
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
 
     lateinit var mContext: Context
     lateinit var ih: ItemHelper
 
     private var demoBookNames = arrayListOf<String>()
-
 
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -46,12 +47,15 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val root =  inflater.inflate(R.layout.fragment_undergraduate_browse, container, false)
+        val root = inflater.inflate(R.layout.fragment_undergraduate_browse, container, false)
 
 
-        undergradMedicalRecyclerView = root.findViewById(R.id.undergraduate_medical_recycler_view) as RecyclerView
-        undergradEngineeringRecyclerView = root.findViewById(R.id.undergraduate_engineering_recycler_view) as RecyclerView
-        undergradBbaRecyclerView = root.findViewById(R.id.undergraduate_bba_recycler_view) as RecyclerView
+        undergradMedicalRecyclerView =
+            root.findViewById(R.id.undergraduate_medical_recycler_view) as RecyclerView
+        undergradEngineeringRecyclerView =
+            root.findViewById(R.id.undergraduate_engineering_recycler_view) as RecyclerView
+        undergradBbaRecyclerView =
+            root.findViewById(R.id.undergraduate_bba_recycler_view) as RecyclerView
 
         /*getting demo book names data from string resources*/
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
@@ -59,8 +63,8 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         mContext = this.context!!
 
         ih = ItemHelper()
-        ih.setGetDoubleCategoryBookSuccessListener(this)
-        ih.setGetDoubleCategoryBookFailureListener(this)
+        ih.setGetSomeDoubleCategoryBookSuccessListener(this)
+        ih.setGetSomeDoubleCategoryBookFailureListener(this)
 
 
         // FAB
@@ -92,27 +96,38 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
 
 //            for these classes, check java generated folder...search in youtube navigation controller safe args
         button_see_ug_med.setOnClickListener {
-            val action = UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment("Undergraduate","Medical")
+            val action =
+                UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment(
+                    "Undergraduate",
+                    "Medical"
+                )
             navController.navigate(action)
         }
         button_see_ug_eng.setOnClickListener {
-            val action = UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment("Undergraduate","Engineering")
+            val action =
+                UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment(
+                    "Undergraduate",
+                    "Engineering"
+                )
             navController.navigate(action)
         }
         button_see_ug_bba.setOnClickListener {
-            val action = UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment("Undergraduate","BBA")
+            val action =
+                UndergraduateBrowseFragmentDirections.actionUndergraduateBrowseFragmentToSeeAllBoooksFragment(
+                    "Undergraduate",
+                    "BBA"
+                )
             navController.navigate(action)
         }
 
     }
 
     private fun initRecyclerView() {
-        ih.getDoubleCategoryBook("Undergraduate", "Medical")
-        ih.getDoubleCategoryBook("Undergraduate", "Engineering")
-        ih.getDoubleCategoryBook("Undergraduate", "BBA")
+        ih.getSomeDoubleCategoryBook("Undergraduate", "Medical", 6)
+        ih.getSomeDoubleCategoryBook("Undergraduate", "Engineering", 6)
+        ih.getSomeDoubleCategoryBook("Undergraduate", "BBA", 6)
 
     }
-
 
 
     override fun onCatClick(name: String?) {
@@ -124,35 +139,35 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         initRecyclerView()
     }
 
-    override fun getDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
+    override fun getSomeDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
         val adapter = GroupAdapter<GroupieViewHolder>()
         lateinit var recycler: RecyclerView
 
         //Finding device width to decide whether to choose GridLayout spanCount
-        var gridSpanCount:Int
+        var gridSpanCount: Int
         val dm = DisplayMetrics()
         activity?.windowManager!!.defaultDisplay.getMetrics(dm)
         var screenWidth = (dm.widthPixels.toDouble() / dm.xdpi).toInt()
-        if(screenWidth < 5) {
+        if (screenWidth < 5) {
             gridSpanCount = 2
-        }else{
+        } else {
             gridSpanCount = 4
         }
 
         when (cat2) {
             "Medical" -> {
                 recycler = undergradMedicalRecyclerView
-                if (bookArray.size <= gridSpanCount ) undergradMedicalRecyclerView.layoutParams.height =
+                if (bookArray.size <= gridSpanCount) undergradMedicalRecyclerView.layoutParams.height =
                     resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
             "Engineering" -> {
                 recycler = undergradEngineeringRecyclerView
-                if (bookArray.size <= gridSpanCount ) undergradEngineeringRecyclerView.layoutParams.height =
+                if (bookArray.size <= gridSpanCount) undergradEngineeringRecyclerView.layoutParams.height =
                     resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
             "BBA" -> {
                 recycler = undergradBbaRecyclerView
-                if (bookArray.size <= gridSpanCount ) undergradBbaRecyclerView.layoutParams.height =
+                if (bookArray.size <= gridSpanCount) undergradBbaRecyclerView.layoutParams.height =
                     resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
         }
@@ -176,7 +191,7 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         adapter.setOnItemClickListener(listener)
     }
 
-    override fun getDoubleCategoryBookFailure() {
+    override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
     }
 

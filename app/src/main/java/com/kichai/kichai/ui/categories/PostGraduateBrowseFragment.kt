@@ -27,8 +27,8 @@ import kotlinx.android.synthetic.main.fragment_post_graduate_browse.*
 
 
 class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
-    ItemOnClickListener.onExitListener, ItemHelper.getDoubleCategoryBookSuccessListener,
-    ItemHelper.getDoubleCategoryBookFailureListener {
+    ItemOnClickListener.onExitListener, ItemHelper.getSomeDoubleCategoryBookSuccessListener,
+    ItemHelper.getSomeDoubleCategoryBookFailureListener {
 
 
     lateinit var mContext: Context
@@ -65,8 +65,8 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         mContext = this.context!!
 
         ih = ItemHelper()
-        ih.setGetDoubleCategoryBookSuccessListener(this)
-        ih.setGetDoubleCategoryBookFailureListener(this)
+        ih.setGetSomeDoubleCategoryBookSuccessListener(this)
+        ih.setGetSomeDoubleCategoryBookFailureListener(this)
 
 
         // FAB
@@ -111,9 +111,9 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
 
     private fun initRecyclerView() {
 
-        ih.getDoubleCategoryBook("Postgraduate", "Medical")
-        ih.getDoubleCategoryBook("Postgraduate", "Engineering")
-        ih.getDoubleCategoryBook("Postgraduate", "MBA")
+        ih.getSomeDoubleCategoryBook("Postgraduate", "Medical", 6)
+        ih.getSomeDoubleCategoryBook("Postgraduate", "Engineering", 6)
+        ih.getSomeDoubleCategoryBook("Postgraduate", "MBA", 6)
     }
 
 
@@ -126,7 +126,7 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         initRecyclerView()
     }
 
-    override fun getDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
+    override fun getSomeDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
         val adapter = GroupAdapter<GroupieViewHolder>()
         lateinit var recycler: RecyclerView
 
@@ -179,7 +179,7 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         adapter.setOnItemClickListener(listener)
     }
 
-    override fun getDoubleCategoryBookFailure() {
+    override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
     }
 }

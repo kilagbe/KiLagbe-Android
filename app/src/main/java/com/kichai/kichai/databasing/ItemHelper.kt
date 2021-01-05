@@ -27,6 +27,9 @@ class ItemHelper {
     private lateinit var mGetDoubleCategoryBookSuccessListener: getDoubleCategoryBookSuccessListener
     private lateinit var mGetDoubleCategoryBookFailureListener: getDoubleCategoryBookFailureListener
 
+    private lateinit var mGetSomeDoubleCategoryBookSuccessListener: getSomeDoubleCategoryBookSuccessListener
+    private lateinit var mGetSomeDoubleCategoryBookFailureListener: getSomeDoubleCategoryBookFailureListener
+
     private lateinit var mChangeAmountBookSuccessListener: changeAmountBookSuccessListener
 
     private lateinit var mGetEssentialSuccessListener: getEssentialSuccessListener
@@ -147,6 +150,30 @@ class ItemHelper {
             }
     }
 
+    fun getSomeDoubleCategoryBook(cat1: String, cat2: String, n:Long)
+    {
+        FirebaseFirestore.getInstance().collection("books").whereEqualTo("categories.$cat1", true).whereEqualTo("categories.$cat2", true).limit(n).get()
+            .addOnSuccessListener {
+                if ( !it.isEmpty )
+                {
+                    var tempArray = arrayListOf<Book>()
+                    for ( doc in it )
+                    {
+                        val temp = doc.toObject(Book::class.java)
+                        tempArray.add(temp)
+                    }
+                    mGetSomeDoubleCategoryBookSuccessListener.getSomeDoubleCategoryBookSuccess(tempArray, cat2)
+                }
+                else
+                {
+                    mGetSomeDoubleCategoryBookFailureListener.getSomeDoubleCategoryBookFailure()
+                }
+            }
+            .addOnFailureListener {
+                mGetSomeDoubleCategoryBookFailureListener.getSomeDoubleCategoryBookFailure()
+            }
+    }
+
     fun getAllBooks()
     {
         FirebaseFirestore.getInstance().collection("books").get()
@@ -250,6 +277,16 @@ class ItemHelper {
         this.mGetDoubleCategoryBookFailureListener = lol
     }
 
+    fun setGetSomeDoubleCategoryBookSuccessListener(lol: getSomeDoubleCategoryBookSuccessListener)
+    {
+        this.mGetSomeDoubleCategoryBookSuccessListener = lol
+    }
+
+    fun setGetSomeDoubleCategoryBookFailureListener(lol: getSomeDoubleCategoryBookFailureListener)
+    {
+        this.mGetSomeDoubleCategoryBookFailureListener = lol
+    }
+
     fun setGetAllBooksSuccessListener(lol: getAllBooksSuccessListener)
     {
         this.mGetAllBooksSuccessListener = lol
@@ -329,6 +366,16 @@ class ItemHelper {
     interface getDoubleCategoryBookSuccessListener
     {
         fun getDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String)
+    }
+
+    interface getSomeDoubleCategoryBookFailureListener
+    {
+        fun getSomeDoubleCategoryBookFailure()
+    }
+
+    interface getSomeDoubleCategoryBookSuccessListener
+    {
+        fun getSomeDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String)
     }
 
     interface getDoubleCategoryBookFailureListener

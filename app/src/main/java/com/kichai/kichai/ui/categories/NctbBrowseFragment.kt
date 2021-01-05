@@ -24,10 +24,12 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_nctb_browse.*
 
 
-class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getDoubleCategoryBookSuccessListener, ItemHelper.getDoubleCategoryBookFailureListener {
+class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
+    ItemOnClickListener.onExitListener, ItemHelper.getSomeDoubleCategoryBookSuccessListener,
+    ItemHelper.getSomeDoubleCategoryBookFailureListener {
 
     private lateinit var nctbTopChatRecyclerView: RecyclerView
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
 
     private lateinit var ih: ItemHelper
 
@@ -53,8 +55,8 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnC
         mContext = this.context!!
 
         ih = ItemHelper()
-        ih.setGetDoubleCategoryBookSuccessListener(this)
-        ih.setGetDoubleCategoryBookFailureListener(this)
+        ih.setGetSomeDoubleCategoryBookSuccessListener(this)
+        ih.setGetSomeDoubleCategoryBookFailureListener(this)
 
         // FAB
         val fab: View = root.findViewById(R.id.fab)
@@ -80,18 +82,26 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnC
 
     private fun setupButtons() {
         button_see_nctb_hsc.setOnClickListener {
-            val action = NctbBrowseFragmentDirections.actionNctbBrowseFragmentToSeeAllBoooksFragment("NCTB", "HSC")
+            val action =
+                NctbBrowseFragmentDirections.actionNctbBrowseFragmentToSeeAllBoooksFragment(
+                    "NCTB",
+                    "HSC"
+                )
             navController.navigate(action)
         }
         button_see_nctb_ssc.setOnClickListener {
-            val action = NctbBrowseFragmentDirections.actionNctbBrowseFragmentToSeeAllBoooksFragment("NCTB", "SSC")
+            val action =
+                NctbBrowseFragmentDirections.actionNctbBrowseFragmentToSeeAllBoooksFragment(
+                    "NCTB",
+                    "SSC"
+                )
             navController.navigate(action)
         }
     }
 
     private fun initRecyclerView() {
-        ih.getDoubleCategoryBook("NCTB", "HSC")
-        ih.getDoubleCategoryBook("NCTB", "SSC")
+        ih.getSomeDoubleCategoryBook("NCTB", "HSC", 6)
+        ih.getSomeDoubleCategoryBook("NCTB", "SSC", 6)
     }
 
 
@@ -104,30 +114,30 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnC
         initRecyclerView()
     }
 
-    override fun getDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
+    override fun getSomeDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
         val adapter = GroupAdapter<GroupieViewHolder>()
         lateinit var recycler: RecyclerView
 
         //Finding device width to decide whether to choose GridLayout spanCount
-        var gridSpanCount:Int
+        var gridSpanCount: Int
         val dm = DisplayMetrics()
         activity?.windowManager!!.defaultDisplay.getMetrics(dm)
         var screenWidth = (dm.widthPixels.toDouble() / dm.xdpi).toInt()
-        gridSpanCount = if(screenWidth < 5) {
+        gridSpanCount = if (screenWidth < 5) {
             2
-        }else{
+        } else {
             4
         }
 
         when (cat2) {
             "HSC" -> {
                 recycler = nctb_hsc_recyclerView
-                if (bookArray.size <= gridSpanCount ) nctb_hsc_recyclerView.layoutParams.height =
+                if (bookArray.size <= gridSpanCount) nctb_hsc_recyclerView.layoutParams.height =
                     resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
             "SSC" -> {
                 recycler = nctb_ssc_recyclerView
-                if (bookArray.size <= gridSpanCount ) nctb_ssc_recyclerView.layoutParams.height =
+                if (bookArray.size <= gridSpanCount) nctb_ssc_recyclerView.layoutParams.height =
                     resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
         }
@@ -148,7 +158,7 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnC
         adapter.setOnItemClickListener(listener)
     }
 
-    override fun getDoubleCategoryBookFailure() {
+    override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
     }
 

@@ -25,11 +25,13 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_literature_browse.*
 
 
-class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getDoubleCategoryBookSuccessListener, ItemHelper.getDoubleCategoryBookFailureListener {
+class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
+    ItemOnClickListener.onExitListener, ItemHelper.getSomeDoubleCategoryBookSuccessListener,
+    ItemHelper.getSomeDoubleCategoryBookFailureListener {
 
 
     private lateinit var literatureTopChatRecyclerView: RecyclerView
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
 
     lateinit var mContext: Context
 
@@ -47,7 +49,8 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, I
         val root = inflater.inflate(R.layout.fragment_literature_browse, container, false)
 
         //todo: change topchart
-        literatureTopChatRecyclerView = root.findViewById(R.id.literature_bangla_recycler_view) as RecyclerView
+        literatureTopChatRecyclerView =
+            root.findViewById(R.id.literature_bangla_recycler_view) as RecyclerView
 
         /*getting demo book names data from string resources*/
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
@@ -55,8 +58,8 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, I
         mContext = this.context!!
 
         ih = ItemHelper()
-        ih.setGetDoubleCategoryBookSuccessListener(this)
-        ih.setGetDoubleCategoryBookFailureListener(this)
+        ih.setGetSomeDoubleCategoryBookSuccessListener(this)
+        ih.setGetSomeDoubleCategoryBookFailureListener(this)
 
 
         // FAB
@@ -83,19 +86,27 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, I
 
     private fun setupButtons() {
         button_see_lit_bangla.setOnClickListener {
-            val action = LiteratureBrowseFragmentDirections.actionLiteratureBrowseFragmentToSeeAllBoooksFragment("Literature", "Bangla")
+            val action =
+                LiteratureBrowseFragmentDirections.actionLiteratureBrowseFragmentToSeeAllBoooksFragment(
+                    "Literature",
+                    "Bangla"
+                )
             navController.navigate(action)
         }
         button_see_lit_eng.setOnClickListener {
-            val action = LiteratureBrowseFragmentDirections.actionLiteratureBrowseFragmentToSeeAllBoooksFragment("Literature", "English")
+            val action =
+                LiteratureBrowseFragmentDirections.actionLiteratureBrowseFragmentToSeeAllBoooksFragment(
+                    "Literature",
+                    "English"
+                )
             navController.navigate(action)
         }
     }
 
 
     private fun initRecyclerView() {
-        ih.getDoubleCategoryBook("Literature", "Bangla")
-        ih.getDoubleCategoryBook("Literature", "English")
+        ih.getSomeDoubleCategoryBook("Literature", "Bangla", 6)
+        ih.getSomeDoubleCategoryBook("Literature", "English", 6)
     }
 
     override fun onCatClick(name: String?) {
@@ -107,30 +118,30 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, I
         initRecyclerView()
     }
 
-    override fun getDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
+    override fun getSomeDoubleCategoryBookSuccess(bookArray: ArrayList<Book>, cat2: String) {
         val adapter = GroupAdapter<GroupieViewHolder>()
         lateinit var recycler: RecyclerView
 
         //Finding device width to decide whether to choose GridLayout spanCount
-        var gridSpanCount:Int
+        var gridSpanCount: Int
         val dm = DisplayMetrics()
         activity?.windowManager!!.defaultDisplay.getMetrics(dm)
         var screenWidth = (dm.widthPixels.toDouble() / dm.xdpi).toInt()
-        if(screenWidth < 5) {
+        if (screenWidth < 5) {
             gridSpanCount = 2
-        }else{
+        } else {
             gridSpanCount = 4
         }
 
         when (cat2) {
             "Bangla" -> {
                 recycler = literature_bangla_recycler_view
-                if (bookArray.size <= gridSpanCount ) literature_bangla_recycler_view.layoutParams.height =
+                if (bookArray.size <= gridSpanCount) literature_bangla_recycler_view.layoutParams.height =
                     resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
             "English" -> {
                 recycler = literature_english_recycler_view
-                if (bookArray.size <= gridSpanCount ) literature_english_recycler_view.layoutParams.height =
+                if (bookArray.size <= gridSpanCount) literature_english_recycler_view.layoutParams.height =
                     resources.getDimension(R.dimen.recyclerview_parent_custom_height_books).toInt()
             }
         }
@@ -151,7 +162,7 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, I
         adapter.setOnItemClickListener(listener)
     }
 
-    override fun getDoubleCategoryBookFailure() {
+    override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
     }
 }
