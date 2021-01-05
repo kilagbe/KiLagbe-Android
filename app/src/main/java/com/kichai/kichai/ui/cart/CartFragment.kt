@@ -22,6 +22,7 @@ import com.kichai.kichai.data.Cart
 import com.kichai.kichai.data.Location
 import com.kichai.kichai.databasing.CartHelper
 import com.kichai.kichai.tools.CustomerOrderAdapter
+import com.kichai.kichai.tools.LoadingDialog
 import com.kichai.kichai.tools.OrderItemOnClickListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -52,6 +53,8 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
         val root = inflater.inflate(R.layout.fragment_cart, container, false)
 
         mContext = this.context!!
+
+        setupLoading()
 
         ch = CartHelper(mContext)
 
@@ -214,5 +217,10 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
 
     override fun checkoutFailure() {
         Toast.makeText(mContext, "Failed to check out", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupLoading(){
+        val loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog()
     }
 }

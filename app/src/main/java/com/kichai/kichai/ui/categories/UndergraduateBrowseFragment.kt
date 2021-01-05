@@ -200,7 +200,7 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
     }
 
-    fun setupLoading(){
+    private fun setupLoading(){
         val loadingDialog = LoadingDialog(mContext)
         loadingDialog.startLoadingDialog()
     }

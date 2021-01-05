@@ -16,6 +16,7 @@ import com.kichai.kichai.databasing.OrderHelper
 import com.kichai.kichai.databasing.ProfileHelper
 import com.kichai.kichai.tools.CustomerCurrentCompleteOrder
 import com.kichai.kichai.tools.CustomerOrderItemOnClickListener
+import com.kichai.kichai.tools.LoadingDialog
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -37,13 +38,16 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
 
         currentOrdersRecycler = root.findViewById(R.id.current_orders_recyclerview)
 
+        mContext = this.context!!
+
+        setupLoading()
+
         oh = OrderHelper()
         ph = ProfileHelper()
 
         oh.setGetOrdersSuccessListener(this)
         oh.setGetOrdersFailureListener(this)
 
-        mContext = this.context!!
 
         return root
     }
@@ -71,5 +75,10 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
 
     override fun getOrdersFailure() {
         Toast.makeText(mContext, "Failed to get orders", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupLoading(){
+        val loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog()
     }
 }

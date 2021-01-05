@@ -20,10 +20,7 @@ import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
 import com.kichai.kichai.data.Essential
 import com.kichai.kichai.databasing.ItemHelper
-import com.kichai.kichai.tools.BookAdapter
-import com.kichai.kichai.tools.EssentialAdapter
-import com.kichai.kichai.tools.ItemOnClickListener
-import com.kichai.kichai.tools.RecycleViewAdapter
+import com.kichai.kichai.tools.*
 import com.kichai.kichai.tools.RecycleViewAdapter.OnCatListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -68,13 +65,16 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         categoryNames = resources.getStringArray(R.array.category_names).toCollection(ArrayList())
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
+        mContext = this.context!!
+
+        setupLoading()
+
         ih = ItemHelper()
         ih.setGetSomeBooksSuccessListener(this)
         ih.setGetSomeBooksFailureListener(this)
 //        ih.setGetAllEssentialsSuccessListener(this)
 //        ih.setGetAllEssentialsFailureListener(this)
 
-        mContext = this.context!!
 
         // FAB
         val fab: View = root.findViewById(R.id.fab)
@@ -216,5 +216,10 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
             "Abroad" -> navController.navigate(R.id.action_navigation_home_to_abroadBrowseFragment)
             "Literature" -> navController.navigate(R.id.action_navigation_home_to_literatureBrowseFragment)
         }
+    }
+
+    private fun setupLoading(){
+        val loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog()
     }
 }

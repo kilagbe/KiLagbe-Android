@@ -20,6 +20,7 @@ import com.kichai.kichai.data.Book
 import com.kichai.kichai.databasing.ItemHelper
 import com.kichai.kichai.tools.BookAdapter
 import com.kichai.kichai.tools.ItemOnClickListener
+import com.kichai.kichai.tools.LoadingDialog
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -63,6 +64,8 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
         mContext = this.context!!
+
+        setupLoading()
 
         ih = ItemHelper()
         ih.setGetSomeDoubleCategoryBookSuccessListener(this)
@@ -181,5 +184,10 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
 
     override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupLoading(){
+        val loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog()
     }
 }

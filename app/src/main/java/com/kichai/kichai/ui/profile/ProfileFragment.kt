@@ -14,6 +14,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.kichai.kichai.R
 import com.kichai.kichai.data.User
 import com.kichai.kichai.databasing.ProfileHelper
+import com.kichai.kichai.tools.LoadingDialog
 import com.kichai.kichai.ui.auth.LoginActivity
 
 class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, ProfileHelper.getCustomerFailureListener, ProfileHelper.getDeliverymanSuccessListener, ProfileHelper.getDeliverymanFailureListener, ProfileHelper.changeProfileSuccessListener, ProfileHelper.changeProfileFailureListener {
@@ -32,6 +33,8 @@ class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, Pr
     ): View? {
 
         mContext = this.context!!
+
+        setupLoading()
 
         val ph = ProfileHelper()
         ph.setGetCustomerSuccessListener(this)
@@ -231,5 +234,10 @@ class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, Pr
 
     override fun changeProfileFailure() {
         Toast.makeText(mContext, "Failed to edit profile", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupLoading(){
+        val loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog()
     }
 }
