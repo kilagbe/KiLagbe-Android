@@ -203,8 +203,5 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     fun setupLoading(){
         val loadingDialog = LoadingDialog(mContext)
         loadingDialog.startLoadingDialog()
-        val handler = Handler()
-        val mRunnable = Runnable { loadingDialog.dismissDialog() }
-        handler.postDelayed(mRunnable, 300)
     }
 }
