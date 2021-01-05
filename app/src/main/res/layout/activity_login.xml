@@ -9,12 +9,16 @@
 
     <EditText
         android:id="@+id/phone_text"
-        android:layout_width="350dp"
-        android:layout_height="53dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="Phone number"
-        android:textSize="@dimen/label_fullscreen"
         android:inputType="textEmailAddress"
+        android:textSize="@dimen/label_fullscreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
@@ -50,9 +54,13 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="155dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background_gradient"
+        android:paddingHorizontal="64dp"
+        android:paddingVertical="16dp"
         android:text="Login"
+        android:textColor="@color/White"
         android:textSize="@dimen/text_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/phone_text"
@@ -77,7 +85,7 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:gravity="left"
         android:text="Phone number"
         android:textSize="@dimen/label_fullscreen"
@@ -91,7 +99,7 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:gravity="left"
         android:text="User type"
         android:textSize="@dimen/label_fullscreen"
