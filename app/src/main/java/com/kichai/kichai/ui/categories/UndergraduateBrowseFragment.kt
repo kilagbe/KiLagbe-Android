@@ -3,11 +3,13 @@ package com.kichai.kichai.ui.categories
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -19,6 +21,7 @@ import com.kichai.kichai.data.Book
 import com.kichai.kichai.databasing.ItemHelper
 import com.kichai.kichai.tools.BookAdapter
 import com.kichai.kichai.tools.ItemOnClickListener
+import com.kichai.kichai.tools.LoadingDialog
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -61,6 +64,8 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
         mContext = this.context!!
+
+        setupLoading()
 
         ih = ItemHelper()
         ih.setGetSomeDoubleCategoryBookSuccessListener(this)
@@ -195,4 +200,11 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
     }
 
+    fun setupLoading(){
+        val loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog()
+        val handler = Handler()
+        val mRunnable = Runnable { loadingDialog.dismissDialog() }
+        handler.postDelayed(mRunnable, 300)
+    }
 }
