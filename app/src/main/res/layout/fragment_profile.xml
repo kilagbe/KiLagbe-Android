@@ -154,6 +154,7 @@
         android:paddingHorizontal="16dp"
         android:text="Edit password"
         android:textSize="@dimen/label_12sp"
+        android:visibility="gone"
         android:textColor="@color/White"
         android:background="@drawable/rounded_background_gradient"
         app:layout_constraintEnd_toEndOf="parent"

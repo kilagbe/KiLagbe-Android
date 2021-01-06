@@ -53,7 +53,7 @@ class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, Pr
         val logout_button = root.findViewById<Button>(R.id.logout_button)
         val username_edit_button = root.findViewById<Button>(R.id.username_edit)
         val useremail_edit_button = root.findViewById<Button>(R.id.useremail_edit)
-        val userpass_edit_button = root.findViewById<Button>(R.id.userpass_edit)
+//        val userpass_edit_button = root.findViewById<Button>(R.id.userpass_edit)
         val userphone_edit_button = root.findViewById<Button>(R.id.userphone_edit)
 
         val user = ph.getUser()
