@@ -33,14 +33,17 @@
             app:destination="@id/abroadBrowseFragment" />
         <action
             android:id="@+id/action_navigation_home_to_literatureBrowseFragment"
-            app:destination="@id/literatureBrowseFragment" />
+            app:destination="@id/literatureBrowseFragment"
+            />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_cart"
         android:name="com.kichai.kichai.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+    </fragment>
+
 
     <fragment
         android:id="@+id/undergraduateBrowseFragment"

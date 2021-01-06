@@ -19,7 +19,8 @@ import com.kichai.kichai.databasing.ItemHelper
 import com.kichai.kichai.tools.AutoCompleteTextViewOnItemClickListener
 import kotlinx.android.synthetic.main.activity_customer_home.*
 
-class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener, ItemHelper.getAllBooksFailureListener, AutoCompleteTextViewOnItemClickListener.onExitListener {
+class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
+    ItemHelper.getAllBooksFailureListener, AutoCompleteTextViewOnItemClickListener.onExitListener {
 
     lateinit var nav: NavigationView
     lateinit var toggle: ActionBarDrawerToggle
@@ -51,17 +52,16 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         val navController = findNavController(R.id.nav_host_fragment)
 
         nav.setupWithNavController(navController)
-        val drawerToggle: ActionBarDrawerToggle= object :ActionBarDrawerToggle(
+        val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
             this,
             drawer,
             toolbar,
-            (R.string.navigation_drawer_open)   ,
+            (R.string.navigation_drawer_open),
             (R.string.navigation_drawer_close)
-        )
-        {
+        ) {
 
         }
-        drawerToggle.isDrawerIndicatorEnabled=true
+        drawerToggle.isDrawerIndicatorEnabled = true
         drawer.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
@@ -77,9 +77,13 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         listener.setOnExitListener(this)
         actv.setOnItemClickListener(listener)
         actv.setAdapter(adapter)
-        actv.setOnFocusChangeListener{view, hasFocus ->
-            if(hasFocus){
-                actv.background=ResourcesCompat.getDrawable(resources,R.drawable.rounded_background_text_darkborder,null)
+        actv.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                actv.background = ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.rounded_background_text_darkborder,
+                    null
+                )
             }
         }
 

@@ -1,5 +1,6 @@
 package com.kichai.kichai.tools
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -18,8 +19,9 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.OnItemClickListener
 
 
-class OrderItemOnClickListener(val context: Context) : OnItemClickListener, CartHelper.updateCartSuccessListener, CartHelper.updateCartFailureListener, CartHelper.cartNotFoundFailureListener
-{
+class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
+    CartHelper.updateCartSuccessListener, CartHelper.updateCartFailureListener,
+    CartHelper.cartNotFoundFailureListener {
     lateinit var dialog: AlertDialog
     lateinit var mOnExitListener: onExitListener
     lateinit var layoutInflater: LayoutInflater
@@ -34,44 +36,69 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener, Cart
         item as CustomerOrderAdapter
         layoutInflater = LayoutInflater.from(context)
 
-        FirebaseFirestore.getInstance().collection("books").whereEqualTo("itemId", item.order.itemid).get()
+        FirebaseFirestore.getInstance().collection("books")
+            .whereEqualTo("itemId", item.order.itemid).get()
             .addOnSuccessListener {
                 if (!it.isEmpty) {
                     dialog = AlertDialog.Builder(context).create()
                     val dialogview = layoutInflater.inflate(R.layout.order_item_display, null)
                     val book = it.documents[0].toObject(Book::class.java)
 
-                    Picasso.get().load(book!!.photoUrl!!).into(dialogview.findViewById<ImageView>(R.id.itemImg))
+                    Picasso.get().load(book!!.photoUrl!!)
+                        .into(dialogview.findViewById<ImageView>(R.id.itemImg))
                     dialogview.findViewById<TextView>(R.id.itemName).text = book.name
                     dialogview.findViewById<TextView>(R.id.itemQty).text = item.order.qty.toString()
-                    dialogview.findViewById<TextView>(R.id.quantity_text).text = item.order.qty.toString()
+                    dialogview.findViewById<TextView>(R.id.quantity_text).text =
+                        item.order.qty.toString()
 
                     dialogview.findViewById<Button>(R.id.inc_button).setOnClickListener {
-                        var q = dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt()
+                        var q =
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
+                                .toInt()
                         if (q < book.amountInStock!!) {
                             q++
-                            dialogview.findViewById<TextView>(R.id.quantity_text).text = q.toString()
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text =
+                                q.toString()
                         } else {
-                            Toast.makeText(context, "Exceeding quantity in stock", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Exceeding quantity in stock",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
                     dialogview.findViewById<Button>(R.id.dec_button).setOnClickListener {
-                        var q = dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt()
+                        var q =
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
+                                .toInt()
                         if (q > 0) {
                             q--
-                            dialogview.findViewById<TextView>(R.id.quantity_text).text = q.toString()
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text =
+                                q.toString()
                         } else {
-                            Toast.makeText(context, "Quantity has to be greater than 0", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Quantity has to be greater than 0",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
                     dialogview.findViewById<Button>(R.id.modify_button).setOnClickListener {
-                        ch.modifyCartBook(item.order.itemid, dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt(), FirebaseAuth.getInstance().uid.toString())
+                        ch.modifyCartBook(
+                            item.order.itemid,
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
+                                .toInt(),
+                            FirebaseAuth.getInstance().uid.toString()
+                        )
                     }
 
                     dialogview.findViewById<Button>(R.id.delete_button).setOnClickListener {
-                        ch.deleteCartBook(item.order.itemid, FirebaseAuth.getInstance().uid.toString())
+                        ch.deleteCartBook(
+                            item.order.itemid,
+                            FirebaseAuth.getInstance().uid.toString()
+                        )
                     }
 
                     dialog.setView(dialogview)
@@ -83,68 +110,80 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener, Cart
                 Toast.makeText(context, "${it.message}", Toast.LENGTH_SHORT).show()
             }
 
-            FirebaseFirestore.getInstance().collection("essentials").whereEqualTo("itemId", item.order.itemid).get()
-                .addOnSuccessListener {
-                    if (!it.isEmpty) {
-                        dialog = AlertDialog.Builder(context).create()
-                        val dialogview = layoutInflater.inflate(R.layout.order_item_display, null)
-                        val book = it.documents[0].toObject(Book::class.java)
-                        Picasso.get().load(book!!.photoUrl!!).into(dialogview.findViewById<ImageView>(R.id.itemImg))
-                        dialogview.findViewById<TextView>(R.id.itemName).text = book.name
-                        dialogview.findViewById<TextView>(R.id.itemQty).text = item.order.qty.toString()
-                        dialogview.findViewById<TextView>(R.id.quantity_text).text = item.order.qty.toString()
-                        dialogview.findViewById<Button>(R.id.inc_button).setOnClickListener {
-                            var q =
-                                dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
-                                    .toInt()
-                            if (q < book.amountInStock!!) {
-                                q++
-                                dialogview.findViewById<TextView>(R.id.quantity_text).text = q.toString()
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "Exceeding quantity in stock",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+        FirebaseFirestore.getInstance().collection("essentials")
+            .whereEqualTo("itemId", item.order.itemid).get()
+            .addOnSuccessListener {
+                if (!it.isEmpty) {
+                    dialog = AlertDialog.Builder(context).create()
+                    val dialogview = layoutInflater.inflate(R.layout.order_item_display, null)
+                    val book = it.documents[0].toObject(Book::class.java)
+                    Picasso.get().load(book!!.photoUrl!!)
+                        .into(dialogview.findViewById<ImageView>(R.id.itemImg))
+                    dialogview.findViewById<TextView>(R.id.itemName).text = book.name
+                    dialogview.findViewById<TextView>(R.id.itemQty).text = item.order.qty.toString()
+                    dialogview.findViewById<TextView>(R.id.quantity_text).text =
+                        item.order.qty.toString()
+                    dialogview.findViewById<Button>(R.id.inc_button).setOnClickListener {
+                        var q =
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
+                                .toInt()
+                        if (q < book.amountInStock!!) {
+                            q++
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text =
+                                q.toString()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Exceeding quantity in stock",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-
-                        dialogview.findViewById<Button>(R.id.dec_button).setOnClickListener {
-                            var q =
-                                dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
-                                    .toInt()
-                            if (q > 0) {
-                                q--
-                                dialogview.findViewById<TextView>(R.id.quantity_text).text = q.toString()
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "Quantity has to be greater than 0",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-
-                        dialogview.findViewById<Button>(R.id.modify_button).setOnClickListener {
-                            ch.modifyCartEssential(item.order.itemid, dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt(), FirebaseAuth.getInstance().uid.toString())
-                        }
-
-                        dialogview.findViewById<Button>(R.id.delete_button).setOnClickListener {
-                            ch.deleteCartEssential(item.order.itemid, FirebaseAuth.getInstance().uid.toString())
-                        }
-
-                        dialog.setView(dialogview)
-                        dialog.setCancelable(true)
-                        dialog.show()
                     }
-                }
-                        .addOnFailureListener {
-                            Toast.makeText(context, "${it.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
 
-    fun setOnExitListener(lol: onExitListener)
-    {
+                    dialogview.findViewById<Button>(R.id.dec_button).setOnClickListener {
+                        var q =
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
+                                .toInt()
+                        if (q > 0) {
+                            q--
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text =
+                                q.toString()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Quantity has to be greater than 0",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    dialogview.findViewById<Button>(R.id.modify_button).setOnClickListener {
+                        ch.modifyCartEssential(
+                            item.order.itemid,
+                            dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
+                                .toInt(),
+                            FirebaseAuth.getInstance().uid.toString()
+                        )
+                    }
+
+                    dialogview.findViewById<Button>(R.id.delete_button).setOnClickListener {
+                        ch.deleteCartEssential(
+                            item.order.itemid,
+                            FirebaseAuth.getInstance().uid.toString()
+                        )
+                    }
+
+                    dialog.setView(dialogview)
+                    dialog.setCancelable(true)
+                    dialog.show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "${it.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    fun setOnExitListener(lol: onExitListener) {
         this.mOnExitListener = lol
     }
 
@@ -156,7 +195,12 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener, Cart
         Toast.makeText(context, "Updated cart successfully", Toast.LENGTH_SHORT).show()
         mOnExitListener.onExit()
         dialog.dismiss()
+
+//        val activity = context as Activity
+//        val navController = Navigation.findNavController(activity, R.id.nav_host_fragment)
+//        navController.navigate(R.id.navigation_cart)
     }
+
 
     override fun updateCartFailure() {
         Toast.makeText(context, "Failed to update cart", Toast.LENGTH_SHORT).show()

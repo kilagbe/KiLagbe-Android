@@ -27,7 +27,9 @@ import com.kichai.kichai.tools.OrderItemOnClickListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
-class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHelper.cartFoundListener, CartHelper.cartNotFoundFailureListener, CartHelper.checkoutSuccessListener, CartHelper.checkoutFailureListener {
+class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
+    CartHelper.cartFoundListener, CartHelper.cartNotFoundFailureListener,
+    CartHelper.checkoutSuccessListener, CartHelper.checkoutFailureListener {
 
     lateinit var ch: CartHelper
     lateinit var mContext: Context
@@ -70,7 +72,8 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
         root.findViewById<Button>(R.id.checkout_button).setOnClickListener {
 
             addressDialog = AlertDialog.Builder(context).create()
-            val addressDialogview = layoutInflater.inflate(R.layout.alert_dialog_user_confirm_address, null)
+            val addressDialogview =
+                layoutInflater.inflate(R.layout.alert_dialog_user_confirm_address, null)
 
             locations = arrayListOf<Location>()
             spinnerList = arrayListOf<String>()
@@ -85,21 +88,28 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
                 val editText = addressDialogview.findViewById(R.id.user_address_text) as EditText
                 mUserAddress = editText.text.toString()
 
-                if(mUserAddress.isNullOrBlank()){
-                    Toast.makeText(this.activity!!, "Please Provide An Address", Toast.LENGTH_SHORT).show()
-                }
-                else{
+                if (mUserAddress.isNullOrBlank()) {
+                    Toast.makeText(this.activity!!, "Please Provide An Address", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
 
                     val mAlertDialog = AlertDialog.Builder(context).create()
                     mAlertDialog.setTitle("Confirm Address")
                     mAlertDialog.setMessage("Do You Confirm This Address?")
-                    mAlertDialog.setButton(Dialog.BUTTON_POSITIVE, "YES", DialogInterface.OnClickListener { dialog, which ->
+                    mAlertDialog.setButton(
+                        Dialog.BUTTON_POSITIVE,
+                        "YES",
+                        DialogInterface.OnClickListener { dialog, which ->
 
 //                          todo: not a todo, but rather a note --- checkoutCart is now here...
-                        ch.checkoutCart(FirebaseAuth.getInstance().uid.toString(), mUserAddress, charge!!)
-                        Toast.makeText(context, "Address Confirmed", Toast.LENGTH_SHORT).show()
-                        addressDialog.dismiss()
-                    })
+                            ch.checkoutCart(
+                                FirebaseAuth.getInstance().uid.toString(),
+                                mUserAddress,
+                                charge!!
+                            )
+                            Toast.makeText(context, "Address Confirmed", Toast.LENGTH_SHORT).show()
+                            addressDialog.dismiss()
+                        })
 
                     mAlertDialog.setButton(Dialog.BUTTON_NEGATIVE, "NO") { dialog, which ->
                         Toast.makeText(context, "Address Cancelled", Toast.LENGTH_SHORT).show()
@@ -121,18 +131,13 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
-    fun getSpinner()
-    {
+    fun getSpinner() {
         FirebaseFirestore.getInstance().collection("locations").get()
             .addOnSuccessListener {
-                if ( it.isEmpty )
-                {
+                if (it.isEmpty) {
                     Toast.makeText(mContext, "Failed to get locations", Toast.LENGTH_SHORT).show()
-                }
-                else
-                {
-                    for ( doc in it )
-                    {
+                } else {
+                    for (doc in it) {
                         val temp = doc.toObject(Location::class.java)
                         locations.add(temp)
                     }
@@ -140,7 +145,11 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
                 locations.forEach {
                     spinnerList.add("${it.name}")
                 }
-                val adapter = ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, spinnerList)
+                val adapter = ArrayAdapter<String>(
+                    mContext,
+                    android.R.layout.simple_spinner_item,
+                    spinnerList
+                )
                 spinner.adapter = adapter
             }
             .addOnFailureListener {
@@ -166,7 +175,8 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
     }
 
     override fun cartNotFoundFailure() {
-        cartrecycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL ,false)
+        cartrecycler.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
         cartrecycler.adapter = adapter
         totalText.text = "0"
     }
@@ -174,8 +184,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
     @SuppressLint("UseRequireInsteadOfGet")
     override fun cartFound(cart: Cart) {
         val context = this.activity!!
-        if ( cart.orderBookItems.isNotEmpty() )
-        {
+        if (cart.orderBookItems.isNotEmpty()) {
             cart.orderBookItems.forEach { orderItem ->
                 adapter.add(CustomerOrderAdapter(orderItem))
             }
@@ -183,27 +192,25 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
             checkoutButton.isEnabled = true
             checkoutButton.setBackgroundResource(R.drawable.rounded_background_gradient)
             checkoutButton.setTextColor(Color.WHITE)
-        }
-        else
-        {
+        } else {
             Toast.makeText(context, "No book items in cart", Toast.LENGTH_SHORT).show()
             checkoutButton.isEnabled = false
+            checkoutButton.setTextColor(Color.LTGRAY)
+            checkoutButton.setBackgroundResource(android.R.drawable.btn_default)
         }
 
-        if ( cart.orderEssentialItems.isNotEmpty() )
-        {
+        if (cart.orderEssentialItems.isNotEmpty()) {
             cart.orderEssentialItems.forEach { orderItem ->
                 adapter.add(CustomerOrderAdapter(orderItem))
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(mContext, "No essential items in cart", Toast.LENGTH_SHORT).show()
         }
         val listener = OrderItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
-        cartrecycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL ,false)
+        cartrecycler.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
         cartrecycler.adapter = adapter
         totalText.text = (cart.total.toString())
 
@@ -219,7 +226,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener, CartHe
         Toast.makeText(mContext, "Failed to check out", Toast.LENGTH_SHORT).show()
     }
 
-    private fun setupLoading(){
+    private fun setupLoading() {
         val loadingDialog = LoadingDialog(mContext)
         loadingDialog.startLoadingDialog()
     }
