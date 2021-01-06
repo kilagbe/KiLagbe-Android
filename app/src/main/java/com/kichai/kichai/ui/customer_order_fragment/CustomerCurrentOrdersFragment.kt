@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
@@ -20,10 +22,13 @@ import com.kichai.kichai.tools.LoadingDialog
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
-class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessListener, OrderHelper.getOrdersFailureListener {
+class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessListener,
+    OrderHelper.getOrdersFailureListener {
 
     lateinit var currentOrdersRecycler: RecyclerView
     lateinit var mContext: Context
+
+    private lateinit var navController: NavController
 
     lateinit var oh: OrderHelper
     lateinit var ph: ProfileHelper
@@ -48,6 +53,11 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
         oh.setGetOrdersSuccessListener(this)
         oh.setGetOrdersFailureListener(this)
 
+        // FAB
+        val fab: View = root.findViewById(R.id.fab)
+        fab.setOnClickListener { view ->
+            navController.navigate(R.id.navigation_cart)
+        }
 
         return root
     }
@@ -57,8 +67,12 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
         super.onStart()
     }
 
-    private fun initRecyclerView()
-    {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
+
+    private fun initRecyclerView() {
         oh.getCustomerPersonalCurrentOrders(ph.getUid().toString())
     }
 
@@ -69,7 +83,8 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
         }
         val listener = CustomerOrderItemOnClickListener(mContext)
         adapter.setOnItemClickListener(listener)
-        currentOrdersRecycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL ,false)
+        currentOrdersRecycler.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
         currentOrdersRecycler.adapter = adapter
     }
 
@@ -77,7 +92,7 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
         Toast.makeText(mContext, "Failed to get orders", Toast.LENGTH_SHORT).show()
     }
 
-    private fun setupLoading(){
+    private fun setupLoading() {
         val loadingDialog = LoadingDialog(mContext)
         loadingDialog.startLoadingDialog()
     }
