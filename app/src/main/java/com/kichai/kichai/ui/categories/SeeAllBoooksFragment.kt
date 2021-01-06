@@ -53,6 +53,11 @@ class SeeAllBoooksFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
         ih.setGetCategoryBookSuccessListener(this)
         ih.setGetCategoryBookFailureListener(this)
 
+        // FAB
+        val fab: View = root.findViewById(R.id.fab)
+        fab.setOnClickListener { view ->
+            navController.navigate(R.id.navigation_cart)
+        }
 
         return root
     }
