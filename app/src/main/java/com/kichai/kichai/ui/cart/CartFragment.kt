@@ -194,9 +194,9 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
             checkoutButton.setTextColor(Color.WHITE)
         } else {
             Toast.makeText(context, "No book items in cart", Toast.LENGTH_SHORT).show()
-            checkoutButton.isEnabled = false
-            checkoutButton.setTextColor(Color.LTGRAY)
             checkoutButton.setBackgroundResource(android.R.drawable.btn_default)
+            checkoutButton.setTextColor(Color.LTGRAY)
+            checkoutButton.isEnabled = false
         }
 
         if (cart.orderEssentialItems.isNotEmpty()) {
