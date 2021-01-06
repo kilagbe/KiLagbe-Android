@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kichai.kichai.R
-import com.kichai.kichai.R.drawable
 import com.kichai.kichai.data.Cart
 import com.kichai.kichai.data.Location
 import com.kichai.kichai.databasing.CartHelper

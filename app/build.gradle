@@ -84,5 +84,5 @@ dependencies {
 
     //card view
     implementation 'androidx.cardview:cardview:1.0.0'
-
+    implementation 'com.hbb20:ccp:2.3.1'
 }

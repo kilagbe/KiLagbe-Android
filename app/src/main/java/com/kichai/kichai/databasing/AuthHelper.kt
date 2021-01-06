@@ -29,7 +29,7 @@ class AuthHelper(var context: Context?) {
 
     fun authWithPhoneNumber(phoneNum: String, loginRegisterType: Int, usertype: Int) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            "+88$phoneNum",
+            phoneNum,
             60L,
             TimeUnit.SECONDS,
             context!! as Activity,
