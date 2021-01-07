@@ -48,7 +48,7 @@ class AuthHelper(var context: Context?) {
                                     if ( alertDialogView.findViewById<EditText>(R.id.name_text).text.toString().isNotEmpty() )
                                     {
                                         val user = User(alertDialogView.findViewById<EditText>(R.id.name_text).text.toString(), phoneNum)
-                                        FirebaseFirestore.getInstance().collection("customers").document(auth.user!!.uid).set(user)
+                                        FirebaseFirestore.getInstance().collection("customer").document(auth.user!!.uid).set(user)
                                             .addOnSuccessListener {
                                                 mOnCustomerRegistrationSuccessListener.customerRegistrationSuccess()
                                             }
