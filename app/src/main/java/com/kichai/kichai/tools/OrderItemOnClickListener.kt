@@ -1,6 +1,5 @@
 package com.kichai.kichai.tools
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -22,10 +21,12 @@ import com.xwray.groupie.OnItemClickListener
 class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
     CartHelper.updateCartSuccessListener, CartHelper.updateCartFailureListener,
     CartHelper.cartNotFoundFailureListener {
+
     lateinit var dialog: AlertDialog
     lateinit var mOnExitListener: onExitListener
     lateinit var layoutInflater: LayoutInflater
 
+    private lateinit var loadingDialog: LoadingDialog
     val ch = CartHelper(context)
 
     override fun onItemClick(item: Item<*>, view: View) {
@@ -72,7 +73,7 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
                         var q =
                             dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
                                 .toInt()
-                        if (q > 0) {
+                        if (q > 1) {
                             q--
                             dialogview.findViewById<TextView>(R.id.quantity_text).text =
                                 q.toString()
@@ -86,6 +87,7 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
                     }
 
                     dialogview.findViewById<Button>(R.id.modify_button).setOnClickListener {
+                        setupLoading()
                         ch.modifyCartBook(
                             item.order.itemid,
                             dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
@@ -95,6 +97,7 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
                     }
 
                     dialogview.findViewById<Button>(R.id.delete_button).setOnClickListener {
+                        setupLoading()
                         ch.deleteCartBook(
                             item.order.itemid,
                             FirebaseAuth.getInstance().uid.toString()
@@ -144,7 +147,7 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
                         var q =
                             dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
                                 .toInt()
-                        if (q > 0) {
+                        if (q > 1) {
                             q--
                             dialogview.findViewById<TextView>(R.id.quantity_text).text =
                                 q.toString()
@@ -158,6 +161,7 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
                     }
 
                     dialogview.findViewById<Button>(R.id.modify_button).setOnClickListener {
+                        setupLoading()
                         ch.modifyCartEssential(
                             item.order.itemid,
                             dialogview.findViewById<TextView>(R.id.quantity_text).text.toString()
@@ -167,6 +171,7 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
                     }
 
                     dialogview.findViewById<Button>(R.id.delete_button).setOnClickListener {
+                        setupLoading()
                         ch.deleteCartEssential(
                             item.order.itemid,
                             FirebaseAuth.getInstance().uid.toString()
@@ -195,6 +200,7 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
         Toast.makeText(context, "Updated cart successfully", Toast.LENGTH_SHORT).show()
         mOnExitListener.onExit()
         dialog.dismiss()
+        loadingDialog.dismissDialog()
 
 //        val activity = context as Activity
 //        val navController = Navigation.findNavController(activity, R.id.nav_host_fragment)
@@ -204,9 +210,16 @@ class OrderItemOnClickListener(val context: Context) : OnItemClickListener,
 
     override fun updateCartFailure() {
         Toast.makeText(context, "Failed to update cart", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun cartNotFoundFailure() {
         Toast.makeText(context, "Failed to get cart", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
+    }
+
+    private fun setupLoading(){
+        loadingDialog = LoadingDialog(context)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

@@ -21,6 +21,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
     lateinit var layoutInflater: LayoutInflater
     lateinit var mOnExitListener: onExitListener
 
+    private lateinit var loadingDialog: LoadingDialog
     val ch = CartHelper(context)
 
     override fun onItemClick(item: Item<*>, view: View) {
@@ -33,6 +34,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
         {
             layoutInflater = LayoutInflater.from(context)
             dialog = AlertDialog.Builder(context).create()
+//            TODO: any animation? in inflating book_display dialog box
             val dialogview = layoutInflater.inflate(R.layout.book_display, null)
             Picasso.get().load(item.book.photoUrl).into(dialogview.findViewById<ImageView>(R.id.bookMainImg))
             dialogview.findViewById<TextView>(R.id.bookName).text = item.book.name
@@ -69,7 +71,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
 
             dialogview.findViewById<Button>(R.id.dec_button).setOnClickListener {
                 var q = dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt()
-                if ( q > 0 )
+                if ( q > 1 )
                 {
                     q--
                     dialogview.findViewById<TextView>(R.id.quantity_text).text = q.toString()
@@ -81,6 +83,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
             }
 
             dialogview.findViewById<Button>(R.id.addToCart_button).setOnClickListener {
+                setupLoading()
                 ch.addToCartBook(item.book, dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt(), FirebaseAuth.getInstance().uid!!)
             }
             dialog.setView(dialogview)
@@ -110,7 +113,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
 
             dialogview.findViewById<Button>(R.id.dec_button).setOnClickListener {
                 var q = dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt()
-                if ( q > 0 )
+                if ( q > 1 )
                 {
                     q--
                     dialogview.findViewById<TextView>(R.id.quantity_text).text = q.toString()
@@ -122,6 +125,7 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
             }
 
             dialogview.findViewById<Button>(R.id.addToCart_button).setOnClickListener {
+                setupLoading()
                 ch.addToCartEssential(item.essential, dialogview.findViewById<TextView>(R.id.quantity_text).text.toString().toInt(), FirebaseAuth.getInstance().uid!!)
             }
             dialog.setView(dialogview)
@@ -134,18 +138,22 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
         Toast.makeText(context, "Updated cart successfully", Toast.LENGTH_SHORT).show()
         mOnExitListener.onExit()
         dialog.dismiss()
+        loadingDialog.dismissDialog()
     }
 
     override fun updateCartFailure() {
         Toast.makeText(context, "Failed to update cart", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun cartNotFoundFailure() {
         Toast.makeText(context, "Failed to get cart", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun quantityFailure() {
         Toast.makeText(context, "Please enter a quantity greater than 0", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     interface onExitListener
@@ -156,5 +164,10 @@ class ItemOnClickListener(val context: Context) : OnItemClickListener, CartHelpe
     fun setOnExitListener(lol: onExitListener)
     {
         this.mOnExitListener = lol
+    }
+
+    private fun setupLoading(){
+        loadingDialog = LoadingDialog(context)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }
