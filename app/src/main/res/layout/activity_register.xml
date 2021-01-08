@@ -24,7 +24,9 @@
             android:id="@+id/countryCodePicker"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            app:ccp_defaultNameCode="BD"
+            />
 
         <EditText
             android:id="@+id/phone_text"
@@ -48,22 +50,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_background_gradient"
+        android:paddingHorizontal="64dp"
+        android:paddingVertical="16dp"
         android:text="Register"
         android:textColor="@color/White"
         android:textSize="@dimen/text_button"
-        android:paddingHorizontal="64dp"
-        android:paddingVertical="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/linearLayout3"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <TextView
         android:id="@+id/login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Already have an account? Login"
         android:textSize="@dimen/text_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,13 +74,12 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="@+id/register_button"
         app:layout_constraintTop_toBottomOf="@+id/register_button"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_marginBottom="148dp"
         android:gravity="left"
         android:text="Phone Number"
         android:textSize="@dimen/label_fullscreen"
@@ -86,6 +88,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintVertical_bias="0.35" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
