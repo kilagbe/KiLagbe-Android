@@ -15,11 +15,13 @@ import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
 import com.kichai.kichai.databasing.ItemHelper
 import com.kichai.kichai.tools.AutoCompleteTextViewOnItemClickListener
+import com.kichai.kichai.tools.LoadingDialog
 import kotlinx.android.synthetic.main.activity_customer_home.*
 
 class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
     ItemHelper.getAllBooksFailureListener, AutoCompleteTextViewOnItemClickListener.onExitListener {
 
+    private lateinit var loadingDialog: LoadingDialog
     lateinit var nav: NavigationView
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
@@ -36,6 +38,7 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
         ih.setGetAllBooksSuccessListener(this)
         ih.setGetAllBooksFailureListener(this)
 
+        setupLoading()
         ih.getAllBooks()
 
         nav = findViewById(R.id.nav_menu)
@@ -84,14 +87,20 @@ class CustomerHome : AppCompatActivity(), ItemHelper.getAllBooksSuccessListener,
                 )
             }
         }
-
+        loadingDialog.dismissDialog()
     }
 
     override fun getAllBooksFailure() {
         Toast.makeText(this, "Could not fetch all books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun onExit() {
         ih.getAllBooks()
+    }
+
+    private fun setupLoading(){
+        loadingDialog = LoadingDialog(this)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

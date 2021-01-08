@@ -15,6 +15,7 @@ import com.kichai.kichai.data.CompleteOrder
 import com.kichai.kichai.databasing.OrderHelper
 import com.kichai.kichai.tools.DeliverymanOrderAdapter
 import com.kichai.kichai.tools.DeliverymanOrderItemOnClickListener
+import com.kichai.kichai.tools.LoadingDialog
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -23,6 +24,7 @@ import com.xwray.groupie.GroupieViewHolder
  */
 class DeliveryAllOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessListener, OrderHelper.getOrdersFailureListener {
 
+    private lateinit var loadingDialog: LoadingDialog
     lateinit var oh: OrderHelper
     lateinit var mContext: Context
 
@@ -50,6 +52,7 @@ class DeliveryAllOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessListen
     }
 
     private fun initRecyclerView() {
+        setupLoading()
         oh.getDeliverymanAllOrders()
     }
 
@@ -65,10 +68,17 @@ class DeliveryAllOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessListen
         adapter.setOnItemClickListener(listener)
         allOrdersRecycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL ,false)
         allOrdersRecycler.adapter = adapter
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun getOrdersFailure() {
         Toast.makeText(mContext, "Failed to get orders", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
+    }
+
+    private fun setupLoading(){
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }
