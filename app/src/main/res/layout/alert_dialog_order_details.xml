@@ -6,7 +6,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <TextView
             android:id="@+id/order_no_textview"
@@ -112,7 +113,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
             android:text="Confirm order"
-            android:textSize="@dimen/label_16sp"
+            android:textSize="@dimen/label_14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/grand_total_text_view"
             app:layout_constraintHorizontal_bias="0.498"

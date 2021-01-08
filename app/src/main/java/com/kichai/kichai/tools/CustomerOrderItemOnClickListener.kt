@@ -2,11 +2,13 @@ package com.kichai.kichai.tools
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
@@ -18,7 +20,8 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.OnItemClickListener
 
-class CustomerOrderItemOnClickListener(val context: Context) : OnItemClickListener, OrderHelper.receiveOrderSuccessListener, OrderHelper.receiveOrderFailureListener {
+class CustomerOrderItemOnClickListener(val context: Context) : OnItemClickListener,
+    OrderHelper.receiveOrderSuccessListener, OrderHelper.receiveOrderFailureListener {
 
     lateinit var dialog: AlertDialog
     lateinit var layoutInflater: LayoutInflater
@@ -33,16 +36,13 @@ class CustomerOrderItemOnClickListener(val context: Context) : OnItemClickListen
         var address: String? = null
         var cart: Cart? = null
 
-        if ( item is CustomerCurrentCompleteOrder )
-        {
+        if (item is CustomerCurrentCompleteOrder) {
             item
             orderId = item.orderItem.orderId!!
             deliverymanphone = item.orderItem.deliverymanphone!!
             address = item.orderItem.address!!
             cart = item.orderItem.cart!!
-        }
-        else
-        {
+        } else {
             item as CustomerPastCompleteOrder
             orderId = item.orderItem.orderId!!
             deliverymanphone = item.orderItem.deliverymanphone!!
@@ -75,21 +75,33 @@ class CustomerOrderItemOnClickListener(val context: Context) : OnItemClickListen
             adapter.add(CustomerOrderAdapter(it))
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL ,false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
 
         dialogview.findViewById<TextView>(R.id.grand_total_text_view).text = cart.total.toString()
 
         // TODO: Remove customer receive order. Maybe show the order status??
-        if ( item is CustomerCurrentCompleteOrder )
-        {
-            dialogview.findViewById<Button>(R.id.confirm_button).text = "RECEIVED ORDER"
-            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener{
+        if (item is CustomerCurrentCompleteOrder) {
+
+//            dialogview.findViewById<Button>(R.id.confirm_button).visibility = View.GONE
+            var status = "Order Status:  "
+            if (item.orderItem.deliverymanstatus == "AWAITING PICK UP") {
+                status += "Assigning Deliveryman"
+            } else if(item.orderItem.deliverymanstatus=="PICKED UP") {
+                status += "Order Processing"
+            }
+
+            val btn = dialogview.findViewById<Button>(R.id.confirm_button)
+            btn.isEnabled = false
+            btn.setBackgroundResource(0)
+            btn.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            btn.text = status
+
+            dialogview.findViewById<Button>(R.id.confirm_button).setOnClickListener {
                 oh.receiveCustomerOrder(orderId.toString())
             }
-        }
-        else
-        {
+        } else {
             dialogview.findViewById<Button>(R.id.confirm_button).visibility = View.INVISIBLE
         }
 
