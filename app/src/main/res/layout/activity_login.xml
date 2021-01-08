@@ -24,7 +24,9 @@
             android:id="@+id/countryCodePicker"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            app:ccp_defaultNameCode="BD"
+            />
 
         <EditText
             android:id="@+id/phone_text"
