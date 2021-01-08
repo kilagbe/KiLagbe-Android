@@ -203,7 +203,6 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
 
     private fun setupLoading(){
         loadingDialog = LoadingDialog(mContext)
-        val mRunnable = Runnable {  }
-        loadingDialog.startLoadingDialog(runnable = mRunnable, delayMillis = null)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

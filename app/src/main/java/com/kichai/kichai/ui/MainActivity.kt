@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), ProfileHelper.getCustomerSuccessListen
             checkUser()
         },SPLASH_TIME_OUT)
 
-
+//      TODO: Should there be any loading progressbar?
 
     }
 
