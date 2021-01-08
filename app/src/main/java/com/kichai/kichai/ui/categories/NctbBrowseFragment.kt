@@ -36,6 +36,7 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
 
     lateinit var mContext: Context
 
+    private lateinit var loadingDialog: LoadingDialog
     private var demoBookNames = arrayListOf<String>()
 
 
@@ -54,8 +55,6 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
         mContext = this.context!!
-
-        setupLoading()
 
         ih = ItemHelper()
         ih.setGetSomeDoubleCategoryBookSuccessListener(this)
@@ -103,6 +102,7 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
     }
 
     private fun initRecyclerView() {
+        setupLoading()
         ih.getSomeDoubleCategoryBook("NCTB", "HSC", 6)
         ih.getSomeDoubleCategoryBook("NCTB", "SSC", 6)
     }
@@ -159,15 +159,18 @@ class NctbBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
+
+        loadingDialog.dismissDialog()
     }
 
     override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 
 }

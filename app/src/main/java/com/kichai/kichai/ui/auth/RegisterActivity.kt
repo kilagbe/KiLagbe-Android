@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hbb20.CountryCodePicker
 import com.kichai.kichai.R
 import com.kichai.kichai.databasing.AuthHelper
+import com.kichai.kichai.tools.LoadingDialog
 import com.kichai.kichai.ui.CustomerHome
 import com.kichai.kichai.ui.DeliverymanHome
 import kotlinx.android.synthetic.main.activity_register.*
@@ -17,6 +18,8 @@ class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationS
     private var ccp: CountryCodePicker? = null
     private var countryCode:String? = null
     private var countryName:String? = null
+
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,7 @@ class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationS
         }
         register_button.setOnClickListener {
             if (phone_text.text.toString().isNotEmpty()) {
+                setupLoading()
                 countryCode = ccp!!.selectedCountryCode
                 ah.authWithPhoneNumber("+" + countryCode + phone_text.text.toString(), 0, 0)
             }
@@ -48,6 +52,7 @@ class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationS
     }
 
     override fun customerRegistrationSuccess() {
+        loadingDialog.dismissDialog()
         val intent = Intent(this, CustomerHome::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.and(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
@@ -55,19 +60,26 @@ class RegisterActivity : AppCompatActivity(), AuthHelper.onCustomerRegistrationS
 
     override fun customerRegistrationFailure() {
         Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun customerLoginSuccess() {
+        loadingDialog.dismissDialog()
         val intent = Intent(this, CustomerHome::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.and(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 
     override fun deliverymanLoginSuccess() {
+        loadingDialog.dismissDialog()
         val intent = Intent(this, DeliverymanHome::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.and(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 
+    private fun setupLoading(){
+        loadingDialog = LoadingDialog(this)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
+    }
 
 }

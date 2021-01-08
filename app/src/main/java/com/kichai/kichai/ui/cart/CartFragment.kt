@@ -39,6 +39,9 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
     lateinit var cartrecycler: RecyclerView
     lateinit var totalText: TextView
     lateinit var checkoutButton: Button
+
+    lateinit var loadingDialog: LoadingDialog
+
     lateinit var adapter: GroupAdapter<GroupieViewHolder>
 
     lateinit var locations: ArrayList<Location>
@@ -55,7 +58,6 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
 
         mContext = this.context!!
 
-        setupLoading()
 
         ch = CartHelper(mContext)
 
@@ -101,6 +103,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
                         DialogInterface.OnClickListener { dialog, which ->
 
 //                          todo: not a todo, but rather a note --- checkoutCart is now here...
+                            setupLoading()
                             ch.checkoutCart(
                                 FirebaseAuth.getInstance().uid.toString(),
                                 mUserAddress,
@@ -131,6 +134,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
 
     @SuppressLint("UseRequireInsteadOfGet")
     fun getSpinner() {
+        setupLoading()
         FirebaseFirestore.getInstance().collection("locations").get()
             .addOnSuccessListener {
                 if (it.isEmpty) {
@@ -154,6 +158,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
             .addOnFailureListener {
                 Toast.makeText(mContext, "Failed to get locations", Toast.LENGTH_SHORT).show()
             }
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -163,6 +168,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
     }
 
     fun initRecyclerView() {
+        setupLoading()
         adapter = GroupAdapter<GroupieViewHolder>()
 
         ch.fetchCart(FirebaseAuth.getInstance().uid.toString())
@@ -178,6 +184,12 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
             LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
         cartrecycler.adapter = adapter
         totalText.text = "0"
+
+        Toast.makeText(context, "cart not found", Toast.LENGTH_SHORT).show()
+        checkoutButton.setBackgroundResource(android.R.drawable.btn_default)
+        checkoutButton.setTextColor(Color.LTGRAY)
+        checkoutButton.isEnabled = false
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -188,6 +200,7 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
                 adapter.add(CustomerOrderAdapter(orderItem))
             }
 
+            Toast.makeText(context, "cart found: ${cart.status}", Toast.LENGTH_SHORT).show()
             checkoutButton.isEnabled = true
             checkoutButton.setBackgroundResource(R.drawable.rounded_background_gradient)
             checkoutButton.setTextColor(Color.WHITE)
@@ -198,13 +211,13 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
             checkoutButton.isEnabled = false
         }
 
-        if (cart.orderEssentialItems.isNotEmpty()) {
-            cart.orderEssentialItems.forEach { orderItem ->
-                adapter.add(CustomerOrderAdapter(orderItem))
-            }
-        } else {
-            Toast.makeText(mContext, "No essential items in cart", Toast.LENGTH_SHORT).show()
-        }
+//        if (cart.orderEssentialItems.isNotEmpty()) {
+//            cart.orderEssentialItems.forEach { orderItem ->
+//                adapter.add(CustomerOrderAdapter(orderItem))
+//            }
+//        } else {
+//            Toast.makeText(mContext, "No essential items in cart", Toast.LENGTH_SHORT).show()
+//        }
         val listener = OrderItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
@@ -213,20 +226,24 @@ class CartFragment : Fragment(), OrderItemOnClickListener.onExitListener,
         cartrecycler.adapter = adapter
         totalText.text = (cart.total.toString())
 
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun checkoutSuccess() {
         Toast.makeText(mContext, "Added cart to orders", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
         initRecyclerView()
     }
 
     override fun checkoutFailure() {
         Toast.makeText(mContext, "Failed to check out", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
+        initRecyclerView()
     }
 
     private fun setupLoading() {
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(runnable = Runnable {  }, delayMillis = null)
     }
 }

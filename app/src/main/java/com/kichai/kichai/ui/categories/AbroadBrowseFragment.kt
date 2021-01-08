@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
@@ -23,7 +22,6 @@ import com.kichai.kichai.tools.LoadingDialog
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_abroad_browse.*
 
 
 class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getCategoryBookSuccessListener, ItemHelper.getCategoryBookFailureListener {
@@ -36,6 +34,7 @@ class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
 
     private lateinit var ih: ItemHelper
 
+    private lateinit var loadingDialog : LoadingDialog
     private var demoBookNames = arrayListOf<String>()
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -53,7 +52,6 @@ class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
 
         mContext = this.context!!
 
-        setupLoading()
 
         ih = ItemHelper()
         ih.setGetCategoryBookSuccessListener(this)
@@ -81,6 +79,7 @@ class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
     }
 
     private fun initRecyclerView() {
+        setupLoading()
         ih.getCategoryBook("Abroad")
     }
 
@@ -123,16 +122,18 @@ class AbroadBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         abroadTopChartAdapter.setOnItemClickListener(listener)
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun getCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 
 }

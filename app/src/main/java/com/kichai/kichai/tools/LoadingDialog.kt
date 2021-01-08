@@ -1,7 +1,5 @@
 package com.kichai.kichai.tools
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
@@ -15,7 +13,8 @@ class LoadingDialog(val context: Context) {
     lateinit var layoutInflater: LayoutInflater
     var mRunnable = Runnable { dismissDialog() }
 
-    fun startLoadingDialog(runnable: Runnable = mRunnable, delayMillis: Long = 300){
+//    TODO: changed delayMillis to 100 for experiment. set back to 300.
+    fun startLoadingDialog(runnable: Runnable = mRunnable, delayMillis: Long? = 100){
         layoutInflater = LayoutInflater.from(context)
         dialog = AlertDialog.Builder(context).create()
         dialog.setView(layoutInflater.inflate(R.layout.loading_dialog, null))
@@ -24,7 +23,9 @@ class LoadingDialog(val context: Context) {
         dialog.show()
 
         val handler = Handler()
-        handler.postDelayed(mRunnable, delayMillis)
+        if (delayMillis != null) {
+            handler.postDelayed(mRunnable, delayMillis)
+        }
     }
 
     fun dismissDialog(){

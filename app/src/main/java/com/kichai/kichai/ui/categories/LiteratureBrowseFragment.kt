@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
@@ -38,6 +37,7 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
 
     private lateinit var ih: ItemHelper
 
+    private lateinit var loadingDialog: LoadingDialog
     private var demoBookNames = arrayListOf<String>()
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -57,8 +57,6 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
         mContext = this.context!!
-
-        setupLoading()
 
         ih = ItemHelper()
         ih.setGetSomeDoubleCategoryBookSuccessListener(this)
@@ -108,6 +106,7 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
 
 
     private fun initRecyclerView() {
+        setupLoading()
         ih.getSomeDoubleCategoryBook("Literature", "Bangla", 6)
         ih.getSomeDoubleCategoryBook("Literature", "English", 6)
     }
@@ -163,14 +162,17 @@ class LiteratureBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
+
+        loadingDialog.dismissDialog()
     }
 
     override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

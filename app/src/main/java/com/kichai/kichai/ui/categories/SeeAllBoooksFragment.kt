@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
@@ -32,6 +31,8 @@ class SeeAllBoooksFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
 
     private lateinit var navController : NavController
 
+    private lateinit var loadingDialog: LoadingDialog
+
     lateinit var mContext : Context
     private lateinit var ih: ItemHelper
 
@@ -43,8 +44,6 @@ class SeeAllBoooksFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
         val root = inflater.inflate(R.layout.fragment_see_all_boooks, container, false)
 
         mContext = this.requireContext()
-
-        setupLoading()
 
         ih = ItemHelper()
         ih.setGetDoubleCategoryBookSuccessListener(this)
@@ -86,6 +85,7 @@ class SeeAllBoooksFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
     }
 
     private fun initRecyclerView() {
+        setupLoading()
         if (cat2 != "null"){
             ih.getDoubleCategoryBook(cat1, cat2)
         }else{
@@ -139,11 +139,14 @@ class SeeAllBoooksFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
+
+        loadingDialog.dismissDialog()
     }
 
 
     override fun getDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
 
@@ -184,15 +187,17 @@ class SeeAllBoooksFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemO
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun getCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

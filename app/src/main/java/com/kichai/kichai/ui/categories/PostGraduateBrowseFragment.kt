@@ -39,6 +39,7 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
 
     private lateinit var navController: NavController
 
+    private lateinit var loadingDialog: LoadingDialog
     private var demoBookNames = arrayListOf<String>()
 
 
@@ -62,8 +63,6 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
         mContext = this.context!!
-
-        setupLoading()
 
         ih = ItemHelper()
         ih.setGetSomeDoubleCategoryBookSuccessListener(this)
@@ -111,7 +110,7 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
 
 
     private fun initRecyclerView() {
-
+        setupLoading()
         ih.getSomeDoubleCategoryBook("Postgraduate", "Medical", 6)
         ih.getSomeDoubleCategoryBook("Postgraduate", "Engineering", 6)
         ih.getSomeDoubleCategoryBook("Postgraduate", "MBA", 6)
@@ -171,21 +170,21 @@ class PostGraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
             GridLayoutManager.VERTICAL,
             false
         )
-
 //        recycler.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL ,false)
-
 
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
+        loadingDialog.dismissDialog()
     }
 
     override fun getSomeDoubleCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

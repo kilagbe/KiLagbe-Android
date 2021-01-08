@@ -30,6 +30,8 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
 
     private lateinit var navController: NavController
 
+    private lateinit var loadingDialog: LoadingDialog
+
     lateinit var oh: OrderHelper
     lateinit var ph: ProfileHelper
 
@@ -44,8 +46,6 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
         currentOrdersRecycler = root.findViewById(R.id.current_orders_recyclerview)
 
         mContext = this.context!!
-
-        setupLoading()
 
         oh = OrderHelper()
         ph = ProfileHelper()
@@ -73,6 +73,7 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
     }
 
     private fun initRecyclerView() {
+        setupLoading()
         oh.getCustomerPersonalCurrentOrders(ph.getUid().toString())
     }
 
@@ -86,14 +87,16 @@ class CustomerCurrentOrdersFragment : Fragment(), OrderHelper.getOrdersSuccessLi
         currentOrdersRecycler.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
         currentOrdersRecycler.adapter = adapter
+        loadingDialog.dismissDialog()
     }
 
     override fun getOrdersFailure() {
         Toast.makeText(mContext, "Failed to get orders", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading() {
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

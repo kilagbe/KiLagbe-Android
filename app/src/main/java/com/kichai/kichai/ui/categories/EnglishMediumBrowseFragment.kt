@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kichai.kichai.R
 import com.kichai.kichai.data.Book
@@ -23,7 +22,6 @@ import com.kichai.kichai.tools.LoadingDialog
 import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_english_medium_browse.*
 
 
 class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener, ItemOnClickListener.onExitListener, ItemHelper.getCategoryBookSuccessListener, ItemHelper.getCategoryBookFailureListener {
@@ -36,6 +34,7 @@ class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
 
     private lateinit var ih: ItemHelper
 
+    private lateinit var loadingDialog: LoadingDialog
     private var demoBookNames = arrayListOf<String>()
 
 
@@ -54,8 +53,6 @@ class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         demoBookNames = resources.getStringArray(R.array.demo_book_names).toCollection(ArrayList())
 
         mContext = this.context!!
-
-        setupLoading()
 
         ih = ItemHelper()
         ih.setGetCategoryBookSuccessListener(this)
@@ -85,6 +82,7 @@ class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
 
 
     private fun initRecyclerView() {
+        setupLoading()
         ih.getCategoryBook("EnglishMedium")
     }
 
@@ -130,15 +128,18 @@ class EnglishMediumBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         englishMediumTopChartAdapter.setOnItemClickListener(listener)
+
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun getCategoryBookFailure() {
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

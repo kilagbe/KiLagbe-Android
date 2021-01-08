@@ -80,6 +80,7 @@ class CustomerOrderItemOnClickListener(val context: Context) : OnItemClickListen
 
         dialogview.findViewById<TextView>(R.id.grand_total_text_view).text = cart.total.toString()
 
+        // TODO: Remove customer receive order. Maybe show the order status??
         if ( item is CustomerCurrentCompleteOrder )
         {
             dialogview.findViewById<Button>(R.id.confirm_button).text = "RECEIVED ORDER"

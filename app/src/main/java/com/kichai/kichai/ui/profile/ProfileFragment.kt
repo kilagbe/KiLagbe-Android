@@ -23,6 +23,8 @@ class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, Pr
     lateinit var useremail_text: TextView
     lateinit var userphone_text: TextView
 
+    private lateinit var loadingDialog: LoadingDialog
+
     lateinit var mContext: Context
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -212,32 +214,37 @@ class ProfileFragment : Fragment(), ProfileHelper.getCustomerSuccessListener, Pr
     override fun getCustomerSuccess(customer: User) {
         username_text.text = customer.name
         userphone_text.text = customer.phone
+        loadingDialog.dismissDialog()
     }
 
     override fun getCustomerFailure() {
         Toast.makeText(mContext, "Failed to get customer", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun getDeliverymanFailure() {
         Toast.makeText(mContext, "Failed to get deliveryman", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun getDeliverymanSuccess(deliveryman: User) {
         username_text.text = deliveryman.name
         userphone_text.text = deliveryman.phone
-
+        loadingDialog.dismissDialog()
     }
 
     override fun changeProfileSuccess() {
         Toast.makeText(mContext, "Successfully edited profile", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     override fun changeProfileFailure() {
         Toast.makeText(mContext, "Failed to edit profile", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(runnable = Runnable {  }, delayMillis = null)
     }
 }

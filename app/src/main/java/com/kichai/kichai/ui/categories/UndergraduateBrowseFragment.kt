@@ -3,13 +3,11 @@ package com.kichai.kichai.ui.categories
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -25,6 +23,7 @@ import com.kichai.kichai.tools.RecycleViewAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_undergraduate_browse.*
+import kotlinx.coroutines.delay
 
 class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener,
     ItemOnClickListener.onExitListener, ItemHelper.getSomeDoubleCategoryBookSuccessListener,
@@ -36,6 +35,7 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     private lateinit var undergradBbaRecyclerView: RecyclerView
 
     private lateinit var navController: NavController
+    private lateinit var loadingDialog: LoadingDialog
 
     lateinit var mContext: Context
     lateinit var ih: ItemHelper
@@ -64,7 +64,6 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
 
         mContext = this.context!!
 
-        setupLoading()
 
         ih = ItemHelper()
         ih.setGetSomeDoubleCategoryBookSuccessListener(this)
@@ -127,10 +126,10 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
     }
 
     private fun initRecyclerView() {
+        setupLoading()
         ih.getSomeDoubleCategoryBook("Undergraduate", "Medical", 6)
         ih.getSomeDoubleCategoryBook("Undergraduate", "Engineering", 6)
         ih.getSomeDoubleCategoryBook("Undergraduate", "BBA", 6)
-
     }
 
 
@@ -193,14 +192,18 @@ class UndergraduateBrowseFragment : Fragment(), RecycleViewAdapter.OnCatListener
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         adapter.setOnItemClickListener(listener)
+
+        loadingDialog.dismissDialog()
     }
 
     override fun getSomeDoubleCategoryBookFailure() {
+        loadingDialog.dismissDialog()
         Toast.makeText(mContext, "Failed to get books", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        val mRunnable = Runnable {  }
+        loadingDialog.startLoadingDialog(runnable = mRunnable, delayMillis = null)
     }
 }

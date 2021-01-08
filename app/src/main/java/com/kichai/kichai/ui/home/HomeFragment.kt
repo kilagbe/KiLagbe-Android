@@ -31,6 +31,7 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         initRecyclerView(this.activity!!)
     }
 
+    private lateinit var loadingDialog: LoadingDialog
     private lateinit var navController : NavController
 
     lateinit var mContext: Context
@@ -65,8 +66,6 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
 
         mContext = this.context!!
 
-        setupLoading()
-
         ih = ItemHelper()
         ih.setGetSomeBooksSuccessListener(this)
         ih.setGetSomeBooksFailureListener(this)
@@ -90,7 +89,7 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
     }
 
     private fun initRecyclerView(context: Context){
-
+        setupLoading()
         val categoryAdapter = RecycleViewAdapter(
             this.context,
             categoryNames,
@@ -169,11 +168,13 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
         val listener = ItemOnClickListener(mContext)
         listener.setOnExitListener(this)
         booksAdapter.setOnItemClickListener(listener)
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun getSomeBooksFailure() {
-        Toast.makeText(mContext, "Failed to get all books", Toast.LENGTH_SHORT).show()
+        Toast.makeText(mContext, "Failed to get some books", Toast.LENGTH_SHORT).show()
+        loadingDialog.dismissDialog()
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -217,7 +218,7 @@ class HomeFragment : Fragment(), OnCatListener, ItemOnClickListener.onExitListen
     }
 
     private fun setupLoading(){
-        val loadingDialog = LoadingDialog(mContext)
-        loadingDialog.startLoadingDialog()
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.startLoadingDialog(Runnable {  }, null)
     }
 }

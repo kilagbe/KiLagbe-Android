@@ -42,6 +42,10 @@ class AuthHelper(var context: Context?) {
                             {
                                 //Call the interface that directs to the details enlisting screen
                                 val alertDialog = AlertDialog.Builder(context).create()
+//
+//                                TODO: should there be cancelable?
+//                                alertDialog.setCancelable(false)
+
                                 layoutInflater = LayoutInflater.from(context)
                                 val alertDialogView = layoutInflater.inflate(R.layout.details_dialog, null)
                                 alertDialogView.findViewById<Button>(R.id.done_button).setOnClickListener {
